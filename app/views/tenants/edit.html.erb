@@ -1,0 +1,17 @@
+<h1>Nouveau locataire</h1>
+<%= form_for @tenant do |f| %>
+  <%= f.label :firstname %>:
+  <%= f.text_field :firstname %><br />
+
+  <%= f.label :lastname %>:
+  <%= f.text_field :lastname %><br />
+
+  <%= f.label :age %>:
+  <%= f.text_field :age %><br />
+
+  <%= f.label :birthdate %>:
+  <%= f.text_field :birthdate %><br />
+
+  <%= f.submit 'Modifier le locataire' %>
+<% end %>
+<%= link_to "Annuler", tenant_path %>
