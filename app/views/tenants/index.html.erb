@@ -1,6 +1,7 @@
 <h1>LOCATAIRES</h1>
 <% @tenants.each do |tenant| %>
-<h2><%= tenant.firstname + ' ' + tenant.lastname + ' - ' + tenant.age.to_s + ' ans' %></h2>
+<% display_name = tenant.firstname + ' ' + tenant.lastname + ' - ' + tenant.age.to_s + ' ans' %>
+<h2><%= link_to display_name, tenant_path(tenant.id) %></h2>
 <% end %>
 <% if @tenants.size == 0 %>
 	<em> Aucun locataire n'a été trouvé</em>
