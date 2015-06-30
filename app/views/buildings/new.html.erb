@@ -1,0 +1,26 @@
+<h1>Nouvel(le) immeuble / maison</h1>
+<%= form_for @building do |f| %>
+  <%= f.label :street_number %>:
+  <%= f.text_field :street_number %><br />
+
+  <%= f.label :street_type %>:
+  <%= f.text_field :street_type %><br />
+
+  <%= f.label :street_name %>:
+  <%= f.text_field :street_name %><br />
+
+  <%= f.label :zipcode %>:
+  <%= f.text_field :zipcode %><br />
+
+  <%= f.label :city %>:
+  <%= f.text_field :city %><br />
+
+  <%= f.label :name %>:
+  <%= f.text_field :name %><br />
+
+  <%= f.label :number_of_appartments %>:
+  <%= f.text_field :number_of_appartments %><br />  
+
+  <%= f.submit "Ajouter cet immeuble" %>
+<% end %>
+<%= link_to "Annuler", buildings_path %>

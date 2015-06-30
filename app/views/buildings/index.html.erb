@@ -1,0 +1,9 @@
+<h1>IMMEUBLES / MAISONS</h1>
+<% @buildings.each do |building| %>
+<h2><%= link_to building.name, building_path(building) %></h2>
+<% end %>
+<% if @buildings.size == 0 %>
+	<em>Aucun(e) immeuble/maison n'a été trouvé(e)</em>
+<% end %>
+<br />
+<%= link_to "Ajouter un immeuble", new_building_path %>

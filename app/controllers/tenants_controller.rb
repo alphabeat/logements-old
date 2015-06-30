@@ -1,10 +1,15 @@
 class TenantsController < ApplicationController
+	before_action :get_tenant, :only => [:show, :edit, :update, :destroy]
+
+	def get_tenant
+		@tenant = Tenant.find(params[:id])
+	end
+
 	def index
 		@tenants = Tenant.all
 	end
 
 	def show 
-		@tenant = Tenant.find(params[:id])
 	end
 
 	def new 
@@ -12,7 +17,6 @@ class TenantsController < ApplicationController
 	end
 
 	def edit
-		@tenant = Tenant.find(params[:id])
 	end
 
 	def create
@@ -21,13 +25,12 @@ class TenantsController < ApplicationController
 	end
 
 	def update
-		@tenant = Tenant.find(params[:id])
 		@tenant.update tenants_params
 		redirect_to tenant_path @tenant
 	end
 
 	def destroy
-		Tenant.find(params[:id]).destroy
+		@tenant.destroy
 		redirect_to :action => 'index'
 	end
 

@@ -1,0 +1,4 @@
+<h1><%= @building.name + ' ' + @building.street_name %></h1>
+<%= link_to 'Modifier cet immeuble', edit_building_path %>
+<%= link_to 'Supprimer cet immeuble', building_path(@building), method: :delete, data: { confirm: "Are you sure ?" } %>
+<%= link_to 'Liste des immeubles', buildings_path %>
