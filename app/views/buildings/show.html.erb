@@ -1,4 +1,5 @@
-<h1><%= @building.name + ' ' + @building.street_name %></h1>
+<h1><%= @building.name %></h1>
+<h2><%= @building.street_number.to_s + ', ' + @building.street_type + ' ' + @building.street_name + ' - ' + @building.zipcode.to_s + ' ' + @building.city %></h2>
 <%= link_to 'Modifier cet immeuble', edit_building_path %>
 <%= link_to 'Supprimer cet immeuble', building_path(@building), method: :delete, data: { confirm: "Are you sure ?" } %>
 <%= link_to 'Liste des immeubles', buildings_path %>

@@ -1,0 +1,9 @@
+<h1>APPARTEMENTS</h1>
+<% @appartments.each do |appartment| %>
+<h2><%= link_to appartment.number, appartment_path(appartment) %></h2>
+<% end %>
+<% if @appartments.size == 0 %>
+	<em>Aucun appartement n'a été trouvé</em>
+<% end %>
+<br />
+<%= link_to "Ajouter un appartement", new_appartment_path %>

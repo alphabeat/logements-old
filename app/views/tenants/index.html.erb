@@ -1,6 +1,6 @@
 <h1>LOCATAIRES</h1>
 <% @tenants.each do |tenant| %>
-<% display_name = tenant.firstname + ' ' + tenant.lastname + ' - ' + tenant.age.to_s + ' ans' %>
+<% display_name = tenant.firstname + ' ' + tenant.lastname %>
 <h2><%= link_to display_name, tenant_path(tenant) %></h2>
 <% end %>
 <% if @tenants.size == 0 %>

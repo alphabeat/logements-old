@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630205419) do
+ActiveRecord::Schema.define(version: 20150701210014) do
+
+  create_table "appartments", force: true do |t|
+    t.integer  "building_id"
+    t.integer  "number"
+    t.integer  "area"
+    t.integer  "rent"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "appartments", ["building_id"], name: "index_appartments_on_building_id"
 
   create_table "buildings", force: true do |t|
     t.integer  "street_number"
@@ -28,10 +39,19 @@ ActiveRecord::Schema.define(version: 20150630205419) do
   create_table "tenants", force: true do |t|
     t.string   "firstname"
     t.string   "lastname"
-    t.integer  "age"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "birthdate"
+    t.integer  "phone"
+    t.integer  "parentsphone"
+    t.string   "email"
+    t.date     "startdate"
+    t.date     "enddate"
+    t.integer  "cafamount"
+    t.integer  "rent"
+    t.boolean  "internet"
+    t.integer  "solde"
+    t.boolean  "haspaid"
   end
 
 end

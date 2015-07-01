@@ -3,7 +3,7 @@ class CreateTenants < ActiveRecord::Migration
     create_table :tenants do |t|
       t.string :firstname
       t.string :lastname
-      t.integer :aage
+      t.integer :age
 
       t.timestamps
     end

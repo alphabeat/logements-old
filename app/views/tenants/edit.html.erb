@@ -1,4 +1,4 @@
-<h1>Nouveau locataire</h1>
+<h1>Modifier locataire</h1>
 <%= form_for @tenant do |f| %>
   <%= f.label :firstname %>:
   <%= f.text_field :firstname %><br />
@@ -6,11 +6,35 @@
   <%= f.label :lastname %>:
   <%= f.text_field :lastname %><br />
 
-  <%= f.label :age %>:
-  <%= f.text_field :age %><br />
-
   <%= f.label :birthdate %>:
   <%= f.text_field :birthdate %><br />
+
+  <%= f.label :phone %>:
+  <%= f.text_field :phone %><br />
+
+  <%= f.label :parentsphone %>:
+  <%= f.text_field :parentsphone %><br />
+
+  <%= f.label :email %>:
+  <%= f.text_field :email %><br />
+  
+  <%= f.label :startdate %>:
+  <%= f.text_field :startdate %><br />
+
+  <%= f.label :enddate %>:
+  <%= f.text_field :enddate %><br />
+
+  <%= f.label :cafamount %>:
+  <%= f.text_field :cafamount %><br />
+
+  <%= f.label :rent %>:
+  <%= f.text_field :rent %><br />
+ 
+  <%= f.label :internet %>:
+  <%= f.check_box :internet %><br />
+
+  <%= f.label :solde %>:
+  <%= f.text_field :solde %><br />
 
   <%= f.submit 'Modifier le locataire' %>
 <% end %>

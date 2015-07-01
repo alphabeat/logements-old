@@ -10,6 +10,7 @@ class TenantsController < ApplicationController
 	end
 
 	def show 
+		@birthdate = display_date @tenant.birthdate
 	end
 
 	def new 
@@ -17,6 +18,7 @@ class TenantsController < ApplicationController
 	end
 
 	def edit
+		@birthdate = display_date @tenant.birthdate
 	end
 
 	def create
@@ -35,6 +37,24 @@ class TenantsController < ApplicationController
 	end
 
 	def tenants_params
-		params.require(:tenant).permit([:firstname, :lastname, :age])
+		params.require(:tenant).permit([
+			:firstname, 
+			:lastname, 
+			:birthdate,
+			:phone,
+			:parentsphone,
+			:email,
+			:startdate,
+			:enddate,
+			:cafamount,
+			:rent,
+			:internet,
+			:solde
+		])
+	end
+
+	def display_date date
+		str = date.day.to_s + '/' + date.mon.to_s + '/' + date.year.to_s
+		return str
 	end
 end

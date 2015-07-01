@@ -1,5 +1,5 @@
-<h1><%= @tenant.firstname + ' ' + @tenant.lastname + ' - ' + @tenant.age.to_s + ' ans' %></h1>
-<h2><%= @tenant.birthdate %></h2>
+<h1><%= @tenant.firstname + ' ' + @tenant.lastname %></h1>
+<h2><%= @birthdate %></h2>
 <%= link_to 'Modifier ce locataire', edit_tenant_path %>
 <%= link_to 'Supprimer ce locataire', tenant_path(@tenant), method: :delete, data: { confirm: "Are you sure ?" } %>
 <%= link_to 'Liste des locataires', tenants_path %>

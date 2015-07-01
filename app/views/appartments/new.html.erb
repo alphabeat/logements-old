@@ -1,0 +1,14 @@
+<h1>Nouvel appartement</h1>
+<%= form_for @appartment do |f| %>
+  <%= f.label :number %>:
+  <%= f.text_field :number %><br />
+
+  <%= f.label :area %>:
+  <%= f.text_field :area %><br />
+
+  <%= f.label :rent %>:
+  <%= f.text_field :rent %><br />
+
+  <%= f.submit "Ajouter cet appartement" %>
+<% end %>
+<%= link_to "Annuler", appartments_path %>
