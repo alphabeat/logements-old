@@ -1,5 +1,9 @@
 <h1>Nouvel appartement</h1>
 <%= form_for @appartment do |f| %>
+  
+  <%= f.label :building %>:
+  <%= f.select :building_id, options_for_select(Building.all.map{|s| [s.name, s.id]}) %><br />
+
   <%= f.label :number %>:
   <%= f.text_field :number %><br />
 

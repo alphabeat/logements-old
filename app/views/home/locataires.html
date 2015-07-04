@@ -1,0 +1,55 @@
+<div ng-controller="TenantsController as tenants" >
+	<div class="col-sm-4 col-sm-offset-3 
+				col-md-4 col-md-offset-2 main">
+		<div class="list-item" 
+			ng-repeat="tenant in tenants.tenants | orderBy:'lastname'" 
+			ng-click="tenants.show(tenant)">
+			<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
+			<h5>
+				{{tenant.appartment_id}}
+			</h5>
+		</div>
+	</div>
+	<div class="col-sm-5 col-sm-offset-7
+				col-md-6 col-md-offset-6 details">
+			<div ng-hide="tenants.details" class="text-center">
+				<h1>Sélectionnez un locataire</h1>
+			</div>
+			<div ng-show="tenants.details">
+				<button class="btn btn-danger pull-right" ng-click="openModal(tenants.details)">
+					Supprimer
+				</button>
+				<button class="btn btn-warning pull-right">Modifier</button>
+				<h3>{{tenants.details.firstname}} {{tenants.details.lastname}}</h3>
+				<h4>
+					{{tenants.details.birthdate | date:'d/M/y'}} <br />
+				</h4>
+				<h5>
+					Téléphone : 0{{tenants.details.phone}}
+				</h5>
+				<div class="col-sm-2 col-md-3 text-right">
+					Téléphone<br />
+					Téléphone des parents <br />
+					Email <br />
+					Date d'entrée <br />
+					Date de sortie <br />
+					Allocations (CAF) <br />
+					Loyer <br />
+					Internet <br />
+					Solde (à payer)<br />
+				</div>
+				<div class="col-sm-2 col-md-4">
+					0{{tenants.details.phone}} <br />
+					0{{tenants.details.parentsphone}} <br />
+					{{tenants.details.email}} <br />
+					{{tenants.details.startdate}} <br />
+					{{tenants.details.enddate}} <br />
+					{{tenants.details.cafamount}} € <br />
+					{{tenants.details.rent}} € <br />
+					{{ (tenants.details.internet) ? "Oui" : "Non" }} <br />
+					{{tenants.details.solde}} € <br />
+				</div>
+			</div>
+	</div>
+	<div class="add">+</div>
+</div>

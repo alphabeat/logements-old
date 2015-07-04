@@ -1,4 +1,5 @@
-<h2><%= @appartment.number.to_s + ', ' + @appartment.area.to_s + ' m², ' + @appartment.rent.to_s + ' € ' %></h2>
+<h2><%= @appartment.building.name %></h2>
+<h3><%= @appartment.number.to_s + ', ' + @appartment.area.to_s + ' m², ' + @appartment.rent.to_s + ' € ' %></h3>
 <%= link_to 'Modifier cet appartement', edit_appartment_path %>
 <%= link_to 'Supprimer cet appartement', appartment_path(@appartment), method: :delete, data: { confirm: "Are you sure ?" } %>
 <%= link_to 'Liste des appartements', appartments_path %>

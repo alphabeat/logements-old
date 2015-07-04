@@ -7,10 +7,20 @@ class TenantsController < ApplicationController
 
 	def index
 		@tenants = Tenant.all
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @tenants }
+		end
 	end
 
 	def show 
 		@birthdate = display_date @tenant.birthdate
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @tenant }
+		end
 	end
 
 	def new 
@@ -49,7 +59,8 @@ class TenantsController < ApplicationController
 			:cafamount,
 			:rent,
 			:internet,
-			:solde
+			:solde,
+			:appartment_id
 		])
 	end
 

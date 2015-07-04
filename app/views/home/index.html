@@ -1,0 +1,105 @@
+<div class="col-sm-4 col-sm-offset-3 
+				col-md-4 col-md-offset-2 main">
+	<div ng-controller="BuildingsController as buildings" ng-show="pages.page === 1">
+		<div class="list-item" 
+			ng-repeat="building in buildings.buildings" 
+			ng-click="pages.showDetails(building)">
+			<span class="badge pull-right">
+				{{building.number_of_appartments}}
+			</span>
+			<h4>{{building.name}}</h4>
+			<h5>
+				{{building.street_number}}, {{building.street_type}} {{building.street_name}} 
+				{{building.zipcode}} - {{building.city}}
+			</h5>
+		</div>
+	</div>
+
+	<div ng-controller="TenantsController as tenants" ng-show="pages.page === 2">
+		<div class="list-item" 
+			ng-repeat="tenant in tenants.tenants | orderBy:'lastname'" 
+			ng-click="pages.showDetails(tenant)">
+			<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
+			<h5>
+				{{tenant.appartment_id}}
+			</h5>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-5 col-sm-offset-7
+			col-md-6 col-md-offset-6 details" >
+		<div ng-hide="pages.details" class="text-center">
+			<h1 ng-if="pages.page === 1">Sélectionnez un immeuble ou une maison</h1>
+			<h1 ng-if="pages.page === 2">Sélectionnez un locataire</h1>
+		</div>
+		<div ng-show="pages.details && pages.page === 1">
+			<button class="btn btn-danger pull-right">Supprimer</button>
+			<button class="btn btn-warning pull-right">Modifier</button>
+			<h3>{{pages.details.name}}</h3>
+			<h4>
+				{{pages.details.street_number}}, {{pages.details.street_type}} {{pages.details.street_name}} 
+				{{pages.details.zipcode}} - {{pages.details.city}}
+			</h4>
+			<div ng-controller="AppartmentsController as appartments">
+				<div ng-controller="TenantsController as tenants">
+					<h3>Liste des appartements de l'immeuble</h3>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>N°</th>
+								<th>Surface</th>
+								<th>Loyer</th>
+								<th>Locataire</th>
+							</tr>
+						</thead>
+						<tbody ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == pages.details.id">
+							<tr>
+								<td>{{appart.number}}</td>
+								<td>{{appart.area | number:2}} m²</td>
+								<td>{{appart.rent | number:2}} €</td>
+								<td ng-repeat="tenant in tenants.tenants" ng-if="tenant.appart_id == appart.id">
+									{{tenant.name}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="pages.details && pages.page === 2 && pages.mode === 'show'">
+			<button class="btn btn-danger pull-right">Supprimer</button>
+			<button class="btn btn-warning pull-right" ng-click="pages.changeMode('edit')">Modifier</button>
+			<h3>{{pages.details.firstname}} {{pages.details.lastname}}</h3>
+			<div class="col-sm-3 col-md-3 text-middle">
+				<strong>Date de naissance</strong><br />
+				<strong>Téléphone</strong><br />
+				<strong>Téléphone des parents</strong><br />
+				<strong>Email</strong><br />
+				<strong>Date d'entrée</strong><br />
+				<strong>Date de sortie</strong><br />
+				<strong>Allocations (CAF)</strong><br />
+				<strong>Loyer</strong><br />
+				<strong>Internet</strong><br />
+				<strong>Solde (à payer)</strong><br />
+			</div>
+			<div class="col-sm-6 col-md-6">
+				{{pages.details.birthdate | date:'d/M/y'}} <br />
+				0{{pages.details.phone}} <br />
+				0{{pages.details.parentsphone}} <br />
+				<a href="mailto:{{pages.details.email}}">{{pages.details.email}}</a> <br />
+				{{pages.details.startdate | date:'d/M/y'}} <br />
+				{{pages.details.enddate | date:'d/M/y'}} <br />
+				{{pages.details.cafamount}} € <br />
+				{{pages.details.rent}} € <br />
+				{{ (pages.details.internet) ? "Oui" : "Non" }} <br />
+				{{pages.details.solde}} € <br />
+			</div>
+		</div>
+
+		<div ng-show="pages.details && pages.page === 2 && pages.mode === 'edit'">
+			<edit-tenant locataire="pages.details"></edit-tenant>
+		</div>
+</div>
+<div class="add">+</div>

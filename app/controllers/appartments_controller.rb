@@ -7,9 +7,18 @@ class AppartmentsController < ApplicationController
 
 	def index
 		@appartments = Appartment.all
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @appartments }
+		end
 	end
 
 	def show 
+		respond_to do |format|
+			format.html
+			format.json { render json: @appartment }
+		end
 	end
 
 	def new 

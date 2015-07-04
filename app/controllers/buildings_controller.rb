@@ -7,9 +7,18 @@ class BuildingsController < ApplicationController
 
 	def index
 		@buildings = Building.all
+
+		respond_to do |format|
+			format.html
+			format.json { render json: @buildings }
+		end
 	end
 
 	def show
+		respond_to do |format|
+			format.html
+			format.json { render json: @building }
+		end
 	end
 
 	def new 
