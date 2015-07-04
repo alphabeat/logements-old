@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('housing', ['ngRoute']);
+	var app = angular.module('housing', ['ngRoute', 'templates']);
 
 	app.controller('PagesController', function () {
 		var that = this;
@@ -21,14 +21,11 @@
 		};
 
 		this.changeMode = function (mode) {
+			if (mode === 'new') {
+				that.details = null;
+			}
+			
 			that.mode = mode;
-		};
-	});
-
-	app.directive('editTenant', function() {
-		return {
-			restrict: 'E',
-			templateUrl: "/tenants/1/edit"
 		};
 	});
 

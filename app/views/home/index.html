@@ -1,6 +1,7 @@
 <div class="col-sm-4 col-sm-offset-3 
-				col-md-4 col-md-offset-2 main">
-	<div ng-controller="BuildingsController as buildings" ng-show="pages.page === 1">
+				col-md-4 col-md-offset-2 main"
+	ng-switch on="pages.page">
+	<div ng-controller="BuildingsController as buildings" ng-switch-when="1">
 		<div class="list-item" 
 			ng-repeat="building in buildings.buildings" 
 			ng-click="pages.showDetails(building)">
@@ -15,7 +16,7 @@
 		</div>
 	</div>
 
-	<div ng-controller="TenantsController as tenants" ng-show="pages.page === 2">
+	<div ng-controller="TenantsController as tenants" ng-switch-when="2">
 		<div class="list-item" 
 			ng-repeat="tenant in tenants.tenants | orderBy:'lastname'" 
 			ng-click="pages.showDetails(tenant)">
@@ -28,78 +29,321 @@
 </div>
 
 <div class="col-sm-5 col-sm-offset-7
-			col-md-6 col-md-offset-6 details" >
-		<div ng-hide="pages.details" class="text-center">
+			col-md-6 col-md-offset-6 details" 
+	ng-switch on="pages.page">
+		<div ng-hide="pages.details || pages.mode === 'new'" class="text-center">
 			<h1 ng-if="pages.page === 1">Sélectionnez un immeuble ou une maison</h1>
 			<h1 ng-if="pages.page === 2">Sélectionnez un locataire</h1>
 		</div>
-		<div ng-show="pages.details && pages.page === 1">
-			<button class="btn btn-danger pull-right">Supprimer</button>
-			<button class="btn btn-warning pull-right">Modifier</button>
-			<h3>{{pages.details.name}}</h3>
-			<h4>
-				{{pages.details.street_number}}, {{pages.details.street_type}} {{pages.details.street_name}} 
-				{{pages.details.zipcode}} - {{pages.details.city}}
-			</h4>
-			<div ng-controller="AppartmentsController as appartments">
-				<div ng-controller="TenantsController as tenants">
-					<h3>Liste des appartements de l'immeuble</h3>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>N°</th>
-								<th>Surface</th>
-								<th>Loyer</th>
-								<th>Locataire</th>
-							</tr>
-						</thead>
-						<tbody ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == pages.details.id">
-							<tr>
-								<td>{{appart.number}}</td>
-								<td>{{appart.area | number:2}} m²</td>
-								<td>{{appart.rent | number:2}} €</td>
-								<td ng-repeat="tenant in tenants.tenants" ng-if="tenant.appart_id == appart.id">
-									{{tenant.name}}
-								</td>
-							</tr>
-						</tbody>
-					</table>
+
+		<div ng-switch on="pages.mode" ng-switch-when="1"> 
+			<div ng-switch-when="show" ng-show="pages.details">
+				<button class="btn btn-danger pull-right">Supprimer</button>
+				<button class="btn btn-warning pull-right" ng-click="pages.changeMode('edit')">Modifier</button>
+				<h3>{{pages.details.name}}</h3>
+				<h4>
+					{{pages.details.street_number}}, {{pages.details.street_type}} {{pages.details.street_name}} 
+					{{pages.details.zipcode}} - {{pages.details.city}}
+				</h4>
+				<div ng-controller="AppartmentsController as appartments">
+					<div ng-controller="TenantsController as tenants">
+						<h3>Liste des appartements de l'immeuble</h3>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>N°</th>
+									<th>Surface</th>
+									<th>Loyer</th>
+									<th>Locataire</th>
+								</tr>
+							</thead>
+							<tbody ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == pages.details.id">
+								<tr>
+									<td>{{appart.number}}</td>
+									<td>{{appart.area | number:2}} m²</td>
+									<td>{{appart.rent | number:2}} €</td>
+									<td ng-repeat="tenant in tenants.tenants" ng-if="tenant.appart_id == appart.id">
+										{{tenant.name}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
+
+			<div ng-switch-when="edit">
+				<h1>Modification d'un immeuble</h1>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" ng-model="pages.details.name" />
+						</div>
+						<label class="col-sm-4 control-label">Nombre d'appartements</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.number_of_appartments" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">N°</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.street_number" />
+						</div>
+						<label class="col-sm-3 control-label">Type de voie</label>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" ng-model="pages.details.street_type" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Nom de voie</label>
+						<div class="col-sm-10">
+							<input class="form-control" type="text" ng-model="pages.details.street_name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Code postal</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.zipcode" />
+						</div>
+						<label class="col-sm-2 control-label">Ville</label>
+						<div class="col-sm-5">
+							<input class="form-control" type="text" ng-model="pages.details.city" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-4">
+							<button class="btn btn-success" ng-click="">Modifier</button>
+							<button class="btn btn-warning" ng-click="pages.changeMode('show')">Annuler</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div ng-switch-when="new">
+				<h1>Ajout d'un(e) nouvel(le) immeuble (maison)</h1>
+				<form class="form-horizontal">
+										<div class="form-group">
+						<label class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" ng-model="pages.details.name" />
+						</div>
+						<label class="col-sm-4 control-label">Nombre d'appartements</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.number_of_appartments" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">N°</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.street_number" />
+						</div>
+						<label class="col-sm-3 control-label">Type de voie</label>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" ng-model="pages.details.street_type" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Nom de voie</label>
+						<div class="col-sm-10">
+							<input class="form-control" type="text" ng-model="pages.details.street_name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Code postal</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.zipcode" />
+						</div>
+						<label class="col-sm-2 control-label">Ville</label>
+						<div class="col-sm-5">
+							<input class="form-control" type="text" ng-model="pages.details.city" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-4">
+							<button class="btn btn-success" ng-click="">Ajouter</button>
+							<button class="btn btn-warning" ng-click="pages.changeMode('show')">Annuler</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 
-		<div ng-show="pages.details && pages.page === 2 && pages.mode === 'show'">
-			<button class="btn btn-danger pull-right">Supprimer</button>
-			<button class="btn btn-warning pull-right" ng-click="pages.changeMode('edit')">Modifier</button>
-			<h3>{{pages.details.firstname}} {{pages.details.lastname}}</h3>
-			<div class="col-sm-3 col-md-3 text-middle">
-				<strong>Date de naissance</strong><br />
-				<strong>Téléphone</strong><br />
-				<strong>Téléphone des parents</strong><br />
-				<strong>Email</strong><br />
-				<strong>Date d'entrée</strong><br />
-				<strong>Date de sortie</strong><br />
-				<strong>Allocations (CAF)</strong><br />
-				<strong>Loyer</strong><br />
-				<strong>Internet</strong><br />
-				<strong>Solde (à payer)</strong><br />
+		<div ng-switch on="pages.mode" ng-switch-when="2">
+			<div ng-switch-when="show" ng-show="pages.details">
+				<button class="btn btn-danger pull-right">Supprimer</button>
+				<button class="btn btn-warning pull-right" ng-click="pages.changeMode('edit')">Modifier</button>
+				<h3>{{pages.details.firstname}} {{pages.details.lastname}}</h3>
+				<div class="col-sm-3 col-md-3 text-middle">
+					<strong>Date de naissance</strong><br />
+					<strong>Téléphone</strong><br />
+					<strong>Téléphone des parents</strong><br />
+					<strong>Email</strong><br />
+					<strong>Date d'entrée</strong><br />
+					<strong>Date de sortie</strong><br />
+					<strong>Allocations (CAF)</strong><br />
+					<strong>Loyer</strong><br />
+					<strong>Internet</strong><br />
+					<strong>Solde (à payer)</strong><br />
+				</div>
+				<div class="col-sm-6 col-md-6">
+					{{pages.details.birthdate | date:'d/M/y'}} <br />
+					0{{pages.details.phone}} <br />
+					0{{pages.details.parentsphone}} <br />
+					<a href="mailto:{{pages.details.email}}">{{pages.details.email}}</a> <br />
+					{{pages.details.startdate | date:'d/M/y'}} <br />
+					{{pages.details.enddate | date:'d/M/y'}} <br />
+					{{pages.details.cafamount}} € <br />
+					{{pages.details.rent}} € <br />
+					{{ (pages.details.internet) ? "Oui" : "Non" }} <br />
+					{{pages.details.solde}} € <br />
+				</div>
 			</div>
-			<div class="col-sm-6 col-md-6">
-				{{pages.details.birthdate | date:'d/M/y'}} <br />
-				0{{pages.details.phone}} <br />
-				0{{pages.details.parentsphone}} <br />
-				<a href="mailto:{{pages.details.email}}">{{pages.details.email}}</a> <br />
-				{{pages.details.startdate | date:'d/M/y'}} <br />
-				{{pages.details.enddate | date:'d/M/y'}} <br />
-				{{pages.details.cafamount}} € <br />
-				{{pages.details.rent}} € <br />
-				{{ (pages.details.internet) ? "Oui" : "Non" }} <br />
-				{{pages.details.solde}} € <br />
+
+			<div ng-switch-when="edit">
+				<h1>Modification du locataire</h1>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Prénom</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.firstname" />
+						</div>
+						<label class="col-sm-1 control-label">Nom</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.lastname" />
+						</div>
+						<label class="col-sm-3 control-label">Date de naissance</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.birthdate | date:'d/M/y'" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Téléphone</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.phone" />
+						</div>
+						<label class="col-sm-3 control-label">Téléphone des parents</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.parentsphone" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" ng-model="pages.details.email" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Date d'entrée</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.startdate | date:'d/M/y'" />
+						</div>
+						<label class="col-sm-2 control-label">Date de sortie</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.enddate |date:'d/M/y'" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Allocation (CAF)</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.cafamount" />
+						</div>
+						<label class="col-sm-2 control-label">Loyer</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.rent" />
+						</div>
+						<label class="col-sm-3 control-label">Internet ?</label>
+						<div class="col-sm-1 checkbox-inline">
+							<input type="checkbox" ng-model="pages.details.internet" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Solde</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.solde" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-4">
+							<button class="btn btn-success" ng-click="">Modifier</button>
+							<button class="btn btn-warning" ng-click="pages.changeMode('show')">Annuler</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div ng-switch-when="new">
+				<h1>Ajout d'un nouveau locataire</h1>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Prénom</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.firstname" />
+						</div>
+						<label class="col-sm-1 control-label">Nom</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.lastname" />
+						</div>
+						<label class="col-sm-3 control-label">Date de naissance</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.birthdate | date:'d/M/y'" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Téléphone</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.phone" />
+						</div>
+						<label class="col-sm-3 control-label">Téléphone des parents</label>
+						<div class="col-sm-3">
+							<input class="form-control" type="text" ng-model="pages.details.parentsphone" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" ng-model="pages.details.email" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Date d'entrée</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.startdate | date:'d/M/y'" />
+						</div>
+						<label class="col-sm-2 control-label">Date de sortie</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.enddate |date:'d/M/y'" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Allocation (CAF)</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.cafamount" />
+						</div>
+						<label class="col-sm-2 control-label">Loyer</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.rent" />
+						</div>
+						<label class="col-sm-3 control-label">Internet ?</label>
+						<div class="col-sm-1 checkbox-inline">
+							<input type="checkbox" ng-model="pages.details.internet" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">Solde</label>
+						<div class="col-sm-2">
+							<input class="form-control" type="text" ng-model="pages.details.solde" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-4">
+							<button class="btn btn-success" ng-click="">Ajouter</button>
+							<button class="btn btn-warning" ng-click="pages.changeMode('show')">Annuler</button>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 
-		<div ng-show="pages.details && pages.page === 2 && pages.mode === 'edit'">
-			<edit-tenant locataire="pages.details"></edit-tenant>
-		</div>
 </div>
-<div class="add">+</div>
+<div class="add" ng-click="pages.changeMode('new')">+</div>
