@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
   <title>Logements</title>
-  <%= javascript_include_tag 'application' %>
-  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-app="housing">
+<body>
 <nav class="navbar navbar-danger navbar-fixed">
-	<h1>Gestion des logements</h1>
+  <h1>Gestion des logements</h1>
 </nav>
 <div class="container-fluid">
-	<div class="row" ng-controller="PagesController as pages">
-		<div class="col-sm-3 col-md-2 sidebar">
-			<ul class="nav nav-sidebar" >
-				<li ng-class="{active : pages.page === 1}">
-					<a href="#" ng-click="pages.switchView(1)">
-						<!-- <span class="glyphicon glyphicon-home"></span> -->
-						 Immeubles / Maisons
-					</a>
-				</li>
-				<li ng-class="{active : pages.page === 2}">
-					<a href="#" ng-click="pages.switchView(2)">
-						<!-- <span class="glyphicon glyphicon-user"></span> -->
-						 Locataires
-					</a>
-				</li>
-			</ul>
-		</div>
+  <div class="row" ng-controller="PagesController as pages">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li ng-class="{ active : pages.page === 1 }">
+          <a href="#/" ng-click="pages.switchView(1)">
+            <!-- <span class="glyphicon glyphicon-home"></span> -->
+             Immeubles / Maisons
+          </a>
+        </li>
+        <li ng-class="{ active : pages.page === 2 }">
+          <a href="#/tenants" ng-click="pages.switchView(2)">
+            <!-- <span class="glyphicon glyphicon-user"></span> -->
+             Locataires
+          </a>
+        </li>
+      </ul>
+    </div>
 
-		<%= yield %>
-	</div>
+    <div ng-view="ng-view"></div>
+    <div class="add" ng-click="pages.changeMode('new')">+</div>
+  </div>
 </div>
 
 </body>

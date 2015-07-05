@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require angular
 //= require angular-route
-//= require angular-rails-templates
-//= require_tree ./angular-app/templates
+//= require angular-resource
 //
-//= require angular-app/app
+//= require ../angular-app/app.js
+//= require_tree ../angular-app

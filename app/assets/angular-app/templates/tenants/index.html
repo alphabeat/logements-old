@@ -1,0 +1,19 @@
+<div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+	<div class="list-item" ng-repeat="tenant in tenants.items | orderBy:'lastname'"
+		ng-click="pages.changeMode('show', tenant.id);">
+		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
+		<h5>
+			{{tenant.appartment_id}}
+		</h5>
+	</div>
+</div>
+
+<div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">
+	<div ng-hide="pages.mode" class="text-center">
+		<h1>Sélectionnez un locataire</h1>
+	</div>
+
+	<show-tenant ng-show="pages.mode === 'show'"></show-tenant>
+
+	<edit-tenant ng-show="pages.mode === 'edit'"></edit-tenant>
+</div>

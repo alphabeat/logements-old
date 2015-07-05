@@ -214,7 +214,7 @@
 						</div>
 						<label class="col-sm-3 control-label">Date de naissance</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.birthdate | date:'d/M/y'" />
+							<input class="form-control" type="text" ng-model="pages.details.birthdate" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -236,11 +236,11 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Date d'entrée</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.startdate | date:'d/M/y'" />
+							<input class="form-control" type="text" ng-model="pages.details.startdate" />
 						</div>
 						<label class="col-sm-2 control-label">Date de sortie</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.enddate |date:'d/M/y'" />
+							<input class="form-control" type="text" ng-model="pages.details.enddate" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -272,75 +272,31 @@
 				</form>
 			</div>
 
-			<div ng-switch-when="new">
+			<div ng-switch-when="new" ng-controller="NewtenantController as tenant">
 				<h1>Ajout d'un nouveau locataire</h1>
-				<form class="form-horizontal">
+				<form name="form" ng-submit="submit()" class="form-horizontal" novalidate>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Prénom</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.firstname" />
+							<input name="firstname" class="form-control" type="text" ng-model="tenant.firstname" required/>
 						</div>
 						<label class="col-sm-1 control-label">Nom</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.lastname" />
+							<input name="lastname" class="form-control" type="text" ng-model="tenant.lastname" required/>
 						</div>
 						<label class="col-sm-3 control-label">Date de naissance</label>
 						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.birthdate | date:'d/M/y'" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Téléphone</label>
-						<div class="col-sm-3">
-							<input class="form-control" type="text" ng-model="pages.details.phone" />
-						</div>
-						<label class="col-sm-3 control-label">Téléphone des parents</label>
-						<div class="col-sm-3">
-							<input class="form-control" type="text" ng-model="pages.details.parentsphone" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Email</label>
-						<div class="col-sm-9">
-							<input class="form-control" type="text" ng-model="pages.details.email" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Date d'entrée</label>
-						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.startdate | date:'d/M/y'" />
-						</div>
-						<label class="col-sm-2 control-label">Date de sortie</label>
-						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.enddate |date:'d/M/y'" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Allocation (CAF)</label>
-						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.cafamount" />
-						</div>
-						<label class="col-sm-2 control-label">Loyer</label>
-						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.rent" />
-						</div>
-						<label class="col-sm-3 control-label">Internet ?</label>
-						<div class="col-sm-1 checkbox-inline">
-							<input type="checkbox" ng-model="pages.details.internet" />
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">Solde</label>
-						<div class="col-sm-2">
-							<input class="form-control" type="text" ng-model="pages.details.solde" />
+							<input name="birthdate" class="form-control" type="text" ng-model="tenant.birthdate" />
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-4">
-							<button class="btn btn-success" ng-click="">Ajouter</button>
+							<button ng-disabled="form.$invalid" class="btn btn-success">Submit</button>
 							<button class="btn btn-warning" ng-click="pages.changeMode('show')">Annuler</button>
 						</div>
 					</div>
+					Firstname input valid: {{form.firstname.$valid}}<br />
+					Lastname input valid: {{form.lastname.$valid}}<br />
 				</form>
 			</div>
 		</div>

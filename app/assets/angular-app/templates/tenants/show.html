@@ -1,0 +1,32 @@
+<h3>{{tenant.tenant.firstname}} {{tenant.tenant.lastname}}</h3>
+
+<button class="btn btn-danger pull-right">Supprimer</button>
+<button class="btn btn-warning pull-right" 
+	ng-click="pages.changeMode('edit', tenant.tenant.id)">
+	Modifier
+</button>
+
+<div class="col-sm-3 col-md-3 text-middle">
+	<strong>Date de naissance</strong><br />
+	<strong>Téléphone</strong><br />
+	<strong>Téléphone des parents</strong><br />
+	<strong>Email</strong><br />
+	<strong>Date d'entrée</strong><br />
+	<strong>Date de sortie</strong><br />
+	<strong>Allocations (CAF)</strong><br />
+	<strong>Loyer</strong><br />
+	<strong>Internet</strong><br />
+	<strong>Solde (à payer)</strong><br />
+</div>
+<div class="col-sm-6 col-md-6">
+	{{tenant.tenant.birthdate | date:'d/M/y'}} <br />
+	0{{tenant.tenant.phone}} <br />
+	0{{tenant.tenant.parentsphone}} <br />
+	<a href="mailto:{{tenant.tenant.email}}">{{tenant.tenant.email}}</a> <br />
+	{{tenant.tenant.startdate | date:'d/M/y'}} <br />
+	{{tenant.tenant.enddate | date:'d/M/y'}} <br />
+	{{tenant.tenant.cafamount}} € <br />
+	{{tenant.tenant.rent}} € <br />
+	{{ (tenant.tenant.internet) ? "Oui" : "Non" }} <br />
+	{{tenant.tenant.solde}} € <br />
+</div>

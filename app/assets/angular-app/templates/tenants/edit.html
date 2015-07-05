@@ -1,0 +1,69 @@
+<h1>Modification du locataire</h1>
+<form class="form-horizontal" ng-submit="tenant.submit(tenant.tenant.id)">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Prénom</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.firstname" />
+		</div>
+		<label class="col-sm-1 control-label">Nom</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.lastname" />
+		</div>
+		<label class="col-sm-3 control-label">Date de naissance</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.birthdate" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Téléphone</label>
+		<div class="col-sm-3">
+			<input class="form-control" type="text" ng-model="tenant.tenant.phone" />
+		</div>
+		<label class="col-sm-3 control-label">Téléphone des parents</label>
+		<div class="col-sm-3">
+			<input class="form-control" type="text" ng-model="tenant.tenant.parentsphone" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Email</label>
+		<div class="col-sm-9">
+			<input class="form-control" type="text" ng-model="tenant.tenant.email" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Date d'entrée</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.startdate" />
+		</div>
+		<label class="col-sm-2 control-label">Date de sortie</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.enddate" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Allocation (CAF)</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.cafamount" />
+		</div>
+		<label class="col-sm-2 control-label">Loyer</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.rent" />
+		</div>
+		<label class="col-sm-3 control-label">Internet ?</label>
+		<div class="col-sm-1 checkbox-inline">
+			<input type="checkbox" ng-model="tenant.tenant.internet" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Solde</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="tenant.tenant.solde" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button type="submit" class="btn btn-success" ng-click="pages.changeMode('show', tenant.tenant.id)">Modifier</button>
+			<button class="btn btn-warning" ng-click="pages.changeMode('show', tenant.tenant.id)">Annuler</button>
+		</div>
+	</div>
+</div>

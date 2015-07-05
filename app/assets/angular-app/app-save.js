@@ -1,7 +1,19 @@
 (function() {
 	'use strict';
 
-	var app = angular.module('housing', ['ngRoute', 'templates']);
+	var app = angular.module('housing', ['ngRoute', 'ngResource']);
+
+	app.config(function($routeProvider) {
+		$routeProvider.when('/tenants', {
+			templateUrl: "angular-app/templates/edit.html",
+			controller: "EditController",
+			controllerAs: "edit"
+		});
+	});
+
+	app.factory('Tenant', function ($resource) {
+		return $resource('/api/tenants/:id', {id: '@id'});
+	});
 
 	app.controller('PagesController', function () {
 		var that = this;
@@ -33,7 +45,7 @@
 		var that = this;
 		this.buildings = {};
 
-		$http.get('/buildings.json')
+		$http.get('/api/buildings.json')
 			 .success(function (data, status, headers, config) {
 			 	that.buildings = data;
 		 		console.log(data);
@@ -47,7 +59,7 @@
 		var that = this;
 		this.appartments = {};
 
-		$http.get('/appartments.json')
+		$http.get('/api/appartments.json')
 		 	.success(function (data, status, headers, config) {
 			 	that.appartments = data;
 			 	console.log(data);
@@ -57,17 +69,33 @@
 		 	});
 	});
 
-	app.controller('TenantsController', function ($http) {
+	app.controller('TenantsController', function (Tenant) {
 		var that = this;
 		this.tenants = {};
 
-		$http.get('/tenants.json')
+		Tenant.query(function (data) {
+			that.tenants = data;
+		});
+
+/*		$http.get('/api/tenants.json')
 			.success(function (data, status, headers, config) {
 				that.tenants = data;
 				console.log(data);
 			})
 			.error(function (data, status, headers, config) {
 				console.log('ERROR');
-			});
+			});*/
+	});
+
+	app.controller('NewtenantController', function (Tenant) {
+		var that = this;
+		this.tenant = {};
+		this.wasSubmitted = false;
+
+		this.submit = function () {
+			that.wasSubmitted = true;
+			Tenant.save(that.tenant);
+			console.log(that.wasSubmitted);
+		};
 	});
 })();
