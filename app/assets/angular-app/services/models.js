@@ -21,8 +21,12 @@ app.factory('Tenants', function ($http) {
 	};
 
 	tenants.save = function (tenant) {
-		$http.put('/api/tenants/'+tenant.id, tenant);
-	}
+		return $http.put('/api/tenants/'+tenant.id, tenant);
+	};
+
+	tenants.new = function (tenant) {
+		$http.post('/api/tenants', tenant);
+	};
 
 	return tenants;
 });

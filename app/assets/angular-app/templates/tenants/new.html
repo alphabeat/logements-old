@@ -1,69 +1,69 @@
-<h1>Modification du locataire</h1>
-<form class="form-horizontal" ng-submit="editTenant.submit(editTenant.tenant.id)">
+<h1>Ajout d'un locataire</h1>
+<form class="form-horizontal" ng-submit="tenant.submit()">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.firstname" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.firstname" />
 		</div>
 		<label class="col-sm-1 control-label">Nom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.lastname" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.lastname" />
 		</div>
 		<label class="col-sm-3 control-label">Date de naissance</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.birthdate" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.birthdate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Téléphone</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.phone" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.phone" />
 		</div>
 		<label class="col-sm-3 control-label">Téléphone des parents</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.parentsphone" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.parentsphone" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-9">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.email" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.email" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Date d'entrée</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.startdate" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.startdate" />
 		</div>
 		<label class="col-sm-2 control-label">Date de sortie</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.enddate" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.enddate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Allocation (CAF)</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.cafamount" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.cafamount" />
 		</div>
 		<label class="col-sm-2 control-label">Loyer</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.rent" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.rent" />
 		</div>
 		<label class="col-sm-3 control-label">Internet ?</label>
 		<div class="col-sm-1 checkbox-inline">
-			<input type="checkbox" ng-model="editTenant.tenant.internet" />
+			<input type="checkbox" ng-model="tenant.newTenant.internet" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Solde</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="editTenant.tenant.solde" />
+			<input class="form-control" type="text" ng-model="tenant.newTenant.solde" />
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
-			<button type="submit" class="btn btn-success" ng-click="pages.changeMode('show', editTenant.tenant.id)">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="pages.changeMode('show', editTenant.tenant.id)">Annuler</button>
+			<button type="submit" class="btn btn-success" ng-click="tenant.submit(); pages.changeMode('show', tenant.newTenant.id)">Ajouter</button>
+			<button type="button" class="btn btn-warning" ng-click="pages.changeMode(null)">Annuler</button>
 		</div>
 	</div>
 </div>

@@ -17,6 +17,18 @@ app.controller('TenantsIndexController', ['Tenants', function (Tenants) {
 	}
 }]);
 
+app.controller('TenantShowController', ['Tenants', '$routeParams', function (Tenants, $routeParams) {
+	var that = this;
+	this.tenant = {};
+
+	if ($routeParams.id) {
+		Tenants.getOne($routeParams.id)
+			.success(function (jsonData, statusCode) {
+				that.tenant = jsonData;
+			});
+	}
+}]);
+
 app.controller('TenantUpdateController', ['Tenants', '$routeParams', '$location', function (Tenants, $routeParams, $location) {
 	var that = this;
 	this.tenant = {};
@@ -32,19 +44,12 @@ app.controller('TenantUpdateController', ['Tenants', '$routeParams', '$location'
 	}
 
 	this.submit = function (id) {
-		Tenants.save(this.tenant);
-		$location.url('/tenants/'+id);
-	}
-}]);
-
-app.controller('TenantShowController', ['Tenants', '$routeParams', function (Tenants, $routeParams) {
-	var that = this;
-	this.tenant = {};
-
-	if ($routeParams.id) {
-		Tenants.getOne($routeParams.id)
+		Tenants.save(that.tenant)
 			.success(function (jsonData, statusCode) {
-				that.tenant = jsonData;
+				console.log('OK');
+			})
+			.error(function (data, statusCode) {
+				console.log('BITE');
 			});
 	}
 }]);
