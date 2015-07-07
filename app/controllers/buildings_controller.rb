@@ -30,17 +30,17 @@ class BuildingsController < ApplicationController
 
 	def create 
 		@building = Building.create building_params
-		redirect_to building_path @building
+		render nothing: true
 	end
 
 	def update
 		@building.update building_params
-		redirect_to building_path @building
+		render nothing: true
 	end
 
 	def destroy
 		@building.destroy
-		redirect_to :action => 'index'
+    	render nothing: true
 	end
 
 	def building_params

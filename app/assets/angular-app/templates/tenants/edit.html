@@ -1,69 +1,69 @@
 <h1>Modification du locataire</h1>
-<form class="form-horizontal" ng-submit="tenant.update(tenant.tenant.id)">
+<form class="form-horizontal" ng-submit="tenant.update(tenant.modif.id)">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.firstname" />
+			<input class="form-control" type="text" ng-model="tenant.modif.firstname" />
 		</div>
 		<label class="col-sm-1 control-label">Nom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.lastname" />
+			<input class="form-control" type="text" ng-model="tenant.modif.lastname" />
 		</div>
 		<label class="col-sm-3 control-label">Date de naissance</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.birthdate" />
+			<input class="form-control" type="text" ng-model="tenant.modif.birthdate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Téléphone</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.tenant.phone" />
+			<input class="form-control" type="text" ng-model="tenant.modif.phone" />
 		</div>
 		<label class="col-sm-3 control-label">Téléphone des parents</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.tenant.parentsphone" />
+			<input class="form-control" type="text" ng-model="tenant.modif.parentsphone" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-9">
-			<input class="form-control" type="text" ng-model="tenant.tenant.email" />
+			<input class="form-control" type="text" ng-model="tenant.modif.email" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Date d'entrée</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.startdate" />
+			<input class="form-control" type="text" ng-model="tenant.modif.startdate" />
 		</div>
 		<label class="col-sm-2 control-label">Date de sortie</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.enddate" />
+			<input class="form-control" type="text" ng-model="tenant.modif.enddate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Allocation (CAF)</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.cafamount" />
+			<input class="form-control" type="text" ng-model="tenant.modif.cafamount" />
 		</div>
 		<label class="col-sm-2 control-label">Loyer</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.rent" />
+			<input class="form-control" type="text" ng-model="tenant.modif.rent" />
 		</div>
 		<label class="col-sm-3 control-label">Internet ?</label>
 		<div class="col-sm-1 checkbox-inline">
-			<input type="checkbox" ng-model="tenant.tenant.internet" />
+			<input type="checkbox" ng-model="tenant.modif.internet" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Solde</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.solde" />
+			<input class="form-control" type="text" ng-model="tenant.modif.solde" />
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
-			<button type="submit" class="btn btn-success" ng-click="pages.changeMode(['show', tenant.tenant.id])">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="pages.changeMode(['show', tenant.tenant.id])">Annuler</button>
+			<button type="submit" class="btn btn-success" ng-click="pages.changeMode(['show', tenant.modif.id])">Modifier</button>
+			<button type="button" class="btn btn-warning" ng-click="tenant.reset(); pages.changeMode(['show', tenant.modif.id])">Annuler</button>
 		</div>
 	</div>
 </form>

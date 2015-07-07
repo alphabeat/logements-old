@@ -3,7 +3,12 @@
 angular.module('app', ['ngRoute', 'ngResource'])
 	   .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	   		$routeProvider
-	   			.when('/', {
+	   			.when('/buildings', {
+	   				controller: 'BuildingsIndexController',
+	   				controllerAs: 'buildings',
+	   				templateUrl: '<%= asset_path('templates/buildings/index.html') %>'
+	   			})
+	   			.when('/buildings/:id', {
 	   				controller: 'BuildingsIndexController',
 	   				controllerAs: 'buildings',
 	   				templateUrl: '<%= asset_path('templates/buildings/index.html') %>'
@@ -17,7 +22,8 @@ angular.module('app', ['ngRoute', 'ngResource'])
 					controller: 'TenantsIndexController',
 	   				controllerAs: 'tenants',
 	   				templateUrl: '<%= asset_path('templates/tenants/index.html') %>'
-	   			});
+	   			})
+	   			.otherwise('/buildings');
 
 	   		$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token').attr('content');
 	   }]);

@@ -1,6 +1,7 @@
 <h3>{{tenant.tenant.firstname}} {{tenant.tenant.lastname}}</h3>
 
-<button class="btn btn-danger pull-right">Supprimer</button>
+<button class="btn btn-danger pull-right"
+	ng-click="tenant.destroy(tenant.tenant.id)">Supprimer</button>
 <button class="btn btn-warning pull-right" 
 	ng-click="pages.changeMode(['edit', tenant.tenant.id])">
 	Modifier

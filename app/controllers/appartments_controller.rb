@@ -30,17 +30,17 @@ class AppartmentsController < ApplicationController
 
 	def create 
 		@appartment = Appartment.create appartment_params
-		redirect_to appartment_path @appartment
+		render nothing: true
 	end
 
 	def update 
 		@appartment.update appartment_params
-		redirect_to appartment_path @appartment
+		render nothing: true
 	end
 
 	def destroy
 		@appartment.destroy
-		redirect_to :action => 'index'
+		render nothing: true
 	end
 
 	def appartment_params

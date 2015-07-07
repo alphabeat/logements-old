@@ -6,6 +6,36 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Building.create({
+  street_number: 15,
+  street_type: "Allée",
+  street_name: "Boissy d'Anglas",
+  zipcode: 91000,
+  city: "Evry",
+  name: "Villa Rodin",
+  number_of_appartments: 15
+})
+
+Building.create({
+  street_number: 53,
+  street_type: "Boulevard",
+  street_name: "de l'Yerres",
+  zipcode: 91000,
+  city: "Evry",
+  name: "Le Lancaster",
+  number_of_appartments: 25
+})
+
+Building.create({
+  street_number: 71,
+  street_type: "Avenue",
+  street_name: "Aristide Briand",
+  zipcode: 92120,
+  city: "Montrouge",
+  name: "Montrouge",
+  number_of_appartments: 35
+})
+
 Tenant.create({lastname: 'Kilo', 
   firstname: 'Julien', 
   birthdate: '21-10-1992', 

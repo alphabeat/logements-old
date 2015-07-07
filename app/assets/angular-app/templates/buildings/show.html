@@ -1,0 +1,32 @@
+<h3>{{building.building.name}}</h3>
+<button class="btn btn-danger pull-right">Supprimer</button>
+<button class="btn btn-warning pull-right">Modifier</button>
+
+<h4>
+	{{building.building.street_number}}, {{building.building.street_type}} {{building.building.street_name}} 
+	{{building.building.zipcode}} - {{building.building.city}}
+</h4>
+
+<div ng-controller="AppartmentsIndexController as appartments">
+		<h3>Liste des appartements de l'immeuble</h3>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>N°</th>
+					<th>Surface</th>
+					<th>Loyer</th>
+					<th>Locataire</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == building.building.id">
+				<tr>
+					<td>{{appart.number}}</td>
+					<td>{{appart.area | number:2}} m²</td>
+					<td>{{appart.rent | number:2}} €</td>
+					<td>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

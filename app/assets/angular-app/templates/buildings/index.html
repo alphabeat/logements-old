@@ -1,5 +1,6 @@
 <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-	<div class="list-item" ng-repeat="building in buildings.items">
+	<div class="list-item" ng-repeat="building in buildings.items | orderBy:'name'"
+		ng-click="pages.changeMode(['show', building.id]);">
 		<span class="badge pull-right">
 			{{building.number_of_appartments}}
 		</span>
@@ -16,5 +17,7 @@
 		<h1>Sélectionnez un immeuble ou une maison</h1>
 	</div>
 
-	<edit-tenant ng-show="pages.mode === 'edit'"></edit-tenant>
+	<div ng-controller="BuildingDetailsController as building">
+		<show-building ng-show="pages.mode[0] === 'show'"></show-building>
+	</div>
 </div>

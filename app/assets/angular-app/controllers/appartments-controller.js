@@ -2,11 +2,11 @@
 
 var app = angular.module('app');
 
-app.controller('BuildingsIndexController', ['Buildings', function (Buildings) {
+app.controller('AppartmentsIndexController', ['Appartments', function (Appartments) {
 	var that = this;
-	this.items = Buildings.query();
+	this.items = Appartments.query();
 }]);
-
+/*
 app.controller('BuildingDetailsController', ['$routeParams', 'Buildings', '$location', '$window',
 	function ($routeParams, Buildings, $location, $window) {
 		var that = this;
@@ -33,4 +33,4 @@ app.controller('BuildingDetailsController', ['$routeParams', 'Buildings', '$loca
 				});
 			}
 		}
-}]);
+}]);*/

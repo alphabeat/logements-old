@@ -15,8 +15,6 @@ class TenantsController < ApplicationController
 	end
 
 	def show 
-		@birthdate = display_date @tenant.birthdate
-
 		respond_to do |format|
 			format.html
 			format.json { render json: @tenant }
@@ -28,21 +26,21 @@ class TenantsController < ApplicationController
 	end
 
 	def edit
-		@birthdate = display_date @tenant.birthdate
 	end
 
 	def create
 		@tenant = Tenant.create tenants_params
+    	render nothing: true
 	end
 
 	def update
 		@tenant.update tenants_params
-    render nothing: true
+    	render nothing: true
 	end
 
 	def destroy
 		@tenant.destroy
-		redirect_to :action => 'index'
+    	render nothing: true
 	end
 
 	def tenants_params
@@ -59,13 +57,8 @@ class TenantsController < ApplicationController
 			:rent,
 			:internet,
 			:solde,
-      :haspaid,
+      		:haspaid,
 			:appartment_id
 		])
-	end
-
-	def display_date date
-		str = date.day.to_s + '/' + date.mon.to_s + '/' + date.year.to_s
-		return str
 	end
 end
