@@ -9,24 +9,14 @@ app.factory('Buildings', ['$resource', function ($resoure) {
 	);
 }]);
 
-app.factory('Tenants', function ($http) {
-	var tenants = {};
-
-	tenants.getAll = function () {
-		return $http.get('/api/tenants');
-	};
-
-	tenants.getOne = function (id) {
-		return $http.get('/api/tenants/'+id);
-	};
-
-	tenants.save = function (tenant) {
-		return $http.put('/api/tenants/'+tenant.id, tenant);
-	};
-
-	tenants.new = function (tenant) {
-		$http.post('/api/tenants', tenant);
-	};
-
-	return tenants;
-});
+app.factory('Tenants', ['$resource', function ($resource) {
+  return $resource(
+    '/api/tenants/:id',
+    {id: '@id'},
+    {
+      get: {method: 'GET'},
+      query: {method: 'GET', isArray: true},
+      'update': {method: 'PUT'}
+    }
+  )
+}]);

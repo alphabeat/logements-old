@@ -8,8 +8,13 @@ app.controller('PagesController', ['$location', function ($location) {
 			that.mode = null;
 		};
 
-		this.changeMode = function (mode, id) {
-			that.mode = mode;
-			$location.url('/tenants/'+id);
+		this.changeMode = function (arr) {
+			that.mode = arr;
+			$location.url('/tenants/'+arr[1]);
 		};
+  
+    this.resetMode = function () {
+      that.mode = null;
+      $location.url('/tenants');
+    }
 	}]);

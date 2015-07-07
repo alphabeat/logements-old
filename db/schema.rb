@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703212453) do
+ActiveRecord::Schema.define(version: 20150707103053) do
 
   create_table "appartments", force: true do |t|
     t.integer  "building_id"
@@ -39,8 +39,6 @@ ActiveRecord::Schema.define(version: 20150703212453) do
   create_table "tenants", force: true do |t|
     t.string   "firstname"
     t.string   "lastname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.date     "birthdate"
     t.integer  "phone"
     t.integer  "parentsphone"
@@ -52,9 +50,11 @@ ActiveRecord::Schema.define(version: 20150703212453) do
     t.boolean  "internet"
     t.integer  "solde"
     t.boolean  "haspaid"
-    t.integer  "apparment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "appartment_id"
   end
 
-  add_index "tenants", ["apparment_id"], name: "index_tenants_on_apparment_id"
+  add_index "tenants", ["appartment_id"], name: "index_tenants_on_appartment_id"
 
 end

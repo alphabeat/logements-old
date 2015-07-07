@@ -33,12 +33,11 @@ class TenantsController < ApplicationController
 
 	def create
 		@tenant = Tenant.create tenants_params
-		redirect_to tenant_path @tenant
 	end
 
 	def update
 		@tenant.update tenants_params
-		redirect_to tenant_path @tenant
+    render nothing: true
 	end
 
 	def destroy
@@ -60,6 +59,7 @@ class TenantsController < ApplicationController
 			:rent,
 			:internet,
 			:solde,
+      :haspaid,
 			:appartment_id
 		])
 	end

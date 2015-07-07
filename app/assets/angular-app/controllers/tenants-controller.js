@@ -4,11 +4,7 @@ var app = angular.module('app');
 
 app.controller('TenantsIndexController', ['Tenants', function (Tenants) {
 	var that = this;
-	this.items = {};
-	Tenants.getAll()
-		.success(function (jsonData, statusCode) {
-			that.items = jsonData;
-		});
+	this.items = Tenants.query();
 
 	this.destroy = function (index) {
 		Tenants.remove({id: that.items[index].id}, function () {
@@ -17,39 +13,28 @@ app.controller('TenantsIndexController', ['Tenants', function (Tenants) {
 	}
 }]);
 
-app.controller('TenantShowController', ['Tenants', '$routeParams', function (Tenants, $routeParams) {
+app.controller('TenantDetailsController', ['$scope', 'Tenants', '$routeParams', '$location', function ($scope, Tenants, $routeParams, $location) {
 	var that = this;
 	this.tenant = {};
 
-	if ($routeParams.id) {
-		Tenants.getOne($routeParams.id)
-			.success(function (jsonData, statusCode) {
-				that.tenant = jsonData;
-			});
-	}
-}]);
-
-app.controller('TenantUpdateController', ['Tenants', '$routeParams', '$location', function (Tenants, $routeParams, $location) {
-	var that = this;
-	this.tenant = {};
-
-	if ($routeParams.id) {
-		Tenants.getOne($routeParams.id)
-			.success(function (jsonData, statusCode) {
-				that.tenant = jsonData;
-			})
-			.error(function (data, statusCode) {
-				console.log(statusCode);
-			});
+	if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
+		  that.tenant = Tenants.get({id: $routeParams.id});
 	}
 
-	this.submit = function (id) {
-		Tenants.save(that.tenant)
-			.success(function (jsonData, statusCode) {
-				console.log('OK');
-			})
-			.error(function (data, statusCode) {
-				console.log('BITE');
-			});
+	this.update = function (id) {
+    Tenants.update({id: id}, that.tenant);
 	}
+                                           
+  this.create = function () {
+    var newTenant = new Tenants(that.tenant);
+    
+    console.log(that.tenant);
+    /*
+    newTenant.$save(function () {
+      $location.url('/tenants');
+    }, function (response) {
+      console.log(response.data.errors);
+    });
+    */
+  } 
 }]);
