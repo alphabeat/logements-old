@@ -2,14 +2,10 @@
 
 var app = angular.module('app');
 
-app.controller('TenantsIndexController', ['Tenants', function (Tenants) {
-	var that = this;
-	this.items = this.items = Tenants.query();
-}]);
-
-app.controller('TenantDetailsController', ['Tenants', '$routeParams', '$location', '$window', 
+app.controller('TenantsIndexController', ['Tenants', '$routeParams', '$location', '$window', 
 	function (Tenants, $routeParams, $location, $window) {
 		var that = this;
+		this.items = Tenants.query();
 		this.tenant = {};
 		this.modif = {};
 
@@ -21,7 +17,9 @@ app.controller('TenantDetailsController', ['Tenants', '$routeParams', '$location
 
 		this.update = function (id) {
 	    	that.tenant = angular.copy(that.modif);
-	    	Tenants.update({id: id}, that.tenant);
+	    	Tenants.update({id: id}, that.tenant, function () {
+	    		that.items = Tenants.query();
+	    	});
 		}
 
 		this.reset = function () {
@@ -32,9 +30,7 @@ app.controller('TenantDetailsController', ['Tenants', '$routeParams', '$location
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer ce locataire ?');
 
 			if (confirm) {
-				Tenants.remove({id: id}, function () {
-					$location.url('/tenants');
-				});
+				Tenants.remove({id: id});
 			}
 		}
 	                                           
@@ -46,5 +42,5 @@ app.controller('TenantDetailsController', ['Tenants', '$routeParams', '$location
 		    }, function (response) {
 		    	console.log(response.data.errors);
 		    });
-  	} 
+  		} 
 }]);

@@ -3,22 +3,12 @@
 angular.module('app', ['ngRoute', 'ngResource'])
 	   .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	   		$routeProvider
-	   			.when('/buildings', {
+	   			.when('/buildings/:id?', {
 	   				controller: 'BuildingsIndexController',
 	   				controllerAs: 'buildings',
 	   				templateUrl: '<%= asset_path('templates/buildings/index.html') %>'
 	   			})
-	   			.when('/buildings/:id', {
-	   				controller: 'BuildingsIndexController',
-	   				controllerAs: 'buildings',
-	   				templateUrl: '<%= asset_path('templates/buildings/index.html') %>'
-	   			})
-	   			.when('/tenants', {
-	   				controller: 'TenantsIndexController',
-	   				controllerAs: 'tenants',
-	   				templateUrl: '<%= asset_path('templates/tenants/index.html') %>'
-	   			})
-	   			.when('/tenants/:id', {
+	   			.when('/tenants/:id?', {
 					controller: 'TenantsIndexController',
 	   				controllerAs: 'tenants',
 	   				templateUrl: '<%= asset_path('templates/tenants/index.html') %>'

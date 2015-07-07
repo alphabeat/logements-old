@@ -1,69 +1,69 @@
 <h1>Modification du locataire</h1>
-<form class="form-horizontal" ng-submit="tenant.update(tenant.modif.id)">
+<form class="form-horizontal" ng-submit="tenants.update(tenants.modif.id)">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.firstname" />
+			<input class="form-control" type="text" ng-model="tenants.modif.firstname" />
 		</div>
 		<label class="col-sm-1 control-label">Nom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.lastname" />
+			<input class="form-control" type="text" ng-model="tenants.modif.lastname" />
 		</div>
 		<label class="col-sm-3 control-label">Date de naissance</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.birthdate" />
+			<input class="form-control" type="text" ng-model="tenants.modif.birthdate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Téléphone</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.modif.phone" />
+			<input class="form-control" type="text" ng-model="tenants.modif.phone" />
 		</div>
 		<label class="col-sm-3 control-label">Téléphone des parents</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.modif.parentsphone" />
+			<input class="form-control" type="text" ng-model="tenants.modif.parentsphone" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-9">
-			<input class="form-control" type="text" ng-model="tenant.modif.email" />
+			<input class="form-control" type="text" ng-model="tenants.modif.email" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Date d'entrée</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.startdate" />
+			<input class="form-control" type="text" ng-model="tenants.modif.startdate" />
 		</div>
 		<label class="col-sm-2 control-label">Date de sortie</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.enddate" />
+			<input class="form-control" type="text" ng-model="tenants.modif.enddate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Allocation (CAF)</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.cafamount" />
+			<input class="form-control" type="text" ng-model="tenants.modif.cafamount" />
 		</div>
 		<label class="col-sm-2 control-label">Loyer</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.rent" />
+			<input class="form-control" type="text" ng-model="tenants.modif.rent" />
 		</div>
 		<label class="col-sm-3 control-label">Internet ?</label>
 		<div class="col-sm-1 checkbox-inline">
-			<input type="checkbox" ng-model="tenant.modif.internet" />
+			<input type="checkbox" ng-model="tenants.modif.internet" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Solde</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.modif.solde" />
+			<input class="form-control" type="text" ng-model="tenants.modif.solde" />
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
-			<button type="submit" class="btn btn-success" ng-click="pages.changeMode(['show', tenant.modif.id])">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="tenant.reset(); pages.changeMode(['show', tenant.modif.id])">Annuler</button>
+			<button type="submit" class="btn btn-success" ng-click="pages.changeMode(['show', tenants.modif.id])">Modifier</button>
+			<button type="button" class="btn btn-warning" ng-click="tenants.reset(); pages.changeMode(['show', tenants.modif.id])">Annuler</button>
 		</div>
 	</div>
 </form>

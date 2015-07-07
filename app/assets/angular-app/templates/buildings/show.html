@@ -1,10 +1,12 @@
-<h3>{{building.building.name}}</h3>
-<button class="btn btn-danger pull-right">Supprimer</button>
-<button class="btn btn-warning pull-right">Modifier</button>
+<h3>{{buildings.building.name}}</h3>
+<button class="btn btn-danger pull-right" 
+	ng-click="buildings.destroy(buildings.building.id); pages.resetMode()">Supprimer</button>
+<button class="btn btn-warning pull-right" 
+	ng-click="pages.changeMode(['edit', buildings.building.id])">Modifier</button>
 
 <h4>
-	{{building.building.street_number}}, {{building.building.street_type}} {{building.building.street_name}} 
-	{{building.building.zipcode}} - {{building.building.city}}
+	{{buildings.building.street_number}}, {{buildings.building.street_type}} {{buildings.building.street_name}} 
+	{{buildings.building.zipcode}} - {{buildings.building.city}}
 </h4>
 
 <div ng-controller="AppartmentsIndexController as appartments">

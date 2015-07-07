@@ -1,0 +1,10 @@
+'use strict';
+
+var app = angular.module('app');
+
+app.directive('newBuilding', function () {
+	return {
+		restrict: 'E',
+		templateUrl: '<%= asset_path('templates/buildings/new.html') %>',
+	};
+});

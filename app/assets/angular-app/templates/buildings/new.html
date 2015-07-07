@@ -1,0 +1,45 @@
+<h1>Ajout d'un nouvel immeuble (ou maison)</h1>
+<form class="form-horizontal" ng-submit="buildings.create()">
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Nom</label>
+		<div class="col-sm-4">
+			<input class="form-control" type="text" ng-model="buildings.building.name" />
+		</div>
+		<label class="col-sm-4 control-label">Nombre d'appartements</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="buildings.building.number_of_appartments" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">N°</label>
+		<div class="col-sm-2">
+			<input class="form-control" type="text" ng-model="buildings.building.street_number" />
+		</div>
+		<label class="col-sm-3 control-label">Type de voie</label>
+		<div class="col-sm-4">
+			<input class="form-control" type="text" ng-model="buildings.building.street_type" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Nom de voie</label>
+		<div class="col-sm-10">
+			<input class="form-control" type="text" ng-model="buildings.building.street_name" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label">Code postal</label>
+		<div class="col-sm-3">
+			<input class="form-control" type="text" ng-model="buildings.building.zipcode" />
+		</div>
+		<label class="col-sm-2 control-label">Ville</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" ng-model="buildings.building.city" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-4">
+			<button class="btn btn-success" ng-click="">Ajouter</button>
+			<button class="btn btn-warning" ng-click="pages.resetMode()">Annuler</button>
+		</div>
+	</div>
+</form>

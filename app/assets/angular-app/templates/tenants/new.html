@@ -1,63 +1,63 @@
 <h1>Ajout d'un locataire</h1>
-<form class="form-horizontal" ng-submit="tenant.create()">
+<form class="form-horizontal" ng-submit="tenants.create()">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.firstname" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.firstname" />
 		</div>
 		<label class="col-sm-1 control-label">Nom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.lastname" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.lastname" />
 		</div>
 		<label class="col-sm-3 control-label">Date de naissance</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.birthdate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.birthdate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Téléphone</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.tenant.phone" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.phone" />
 		</div>
 		<label class="col-sm-3 control-label">Téléphone des parents</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenant.tenant.parentsphone" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.parentsphone" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-9">
-			<input class="form-control" type="text" ng-model="tenant.tenant.email" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.email" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Date d'entrée</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.startdate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.startdate" />
 		</div>
 		<label class="col-sm-2 control-label">Date de sortie</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.enddate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.enddate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Allocation (CAF)</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.cafamount" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.cafamount" />
 		</div>
 		<label class="col-sm-2 control-label">Loyer</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.rent" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.rent" />
 		</div>
 		<label class="col-sm-3 control-label">Internet ?</label>
 		<div class="col-sm-1 checkbox-inline">
-			<input type="checkbox" ng-model="tenant.tenant.internet" />
+			<input type="checkbox" ng-model="tenants.tenant.internet" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Solde</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenant.tenant.solde" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.solde" />
 		</div>
 	</div>
 	<div class="form-group">

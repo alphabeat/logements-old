@@ -17,7 +17,9 @@
 		<h1>Sélectionnez un immeuble ou une maison</h1>
 	</div>
 
-	<div ng-controller="BuildingDetailsController as building">
-		<show-building ng-show="pages.mode[0] === 'show'"></show-building>
-	</div>
+	<show-building ng-show="pages.mode[0] === 'show'"></show-building>
+
+	<edit-building ng-show="pages.mode[0] === 'edit'"></edit-building>
+
+	<new-building ng-show="pages.mode[0] === 'new'"></new-buildings>
 </div>

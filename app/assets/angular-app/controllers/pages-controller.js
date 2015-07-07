@@ -10,7 +10,7 @@ app.controller('PagesController', ['$location', function ($location) {
 
 	this.changeMode = function (arr) {
 		that.mode = arr;
-		if (that.page == 1)
+		if (that.page == 1) 
 			$location.url('/buildings/'+arr[1]);
 		else if (that.page == 2)
 			$location.url('/tenants/'+arr[1]);
@@ -18,6 +18,9 @@ app.controller('PagesController', ['$location', function ($location) {
   
     this.resetMode = function () {
       	that.mode = null;
-      	$location.url('/tenants');
+    	if (that.page == 1) 
+			$location.url('/buildings');
+		else if (that.page == 2)
+			$location.url('/tenants');
     }
 }]);

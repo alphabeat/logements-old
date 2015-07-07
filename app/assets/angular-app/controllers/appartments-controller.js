@@ -6,31 +6,31 @@ app.controller('AppartmentsIndexController', ['Appartments', function (Appartmen
 	var that = this;
 	this.items = Appartments.query();
 }]);
-/*
-app.controller('BuildingDetailsController', ['$routeParams', 'Buildings', '$location', '$window',
-	function ($routeParams, Buildings, $location, $window) {
+
+app.controller('AppartmentsDetailsController', ['$routeParams', 'Appartments', '$location', '$window',
+	function ($routeParams, Appartments, $location, $window) {
 		var that = this;
-		this.building = {};
+		this.appartment = {};
 		this.modif = {};
 
 		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.building = Buildings.get({id: $routeParams.id}, function () {
-				that.modif = angular.copy(that.building);
+			that.appartment = Appartments.get({id: $routeParams.id}, function () {
+				that.modif = angular.copy(that.appartment);
 			});
 		}
 
 		this.update = function(id) {
-			that.building = angular.copy(that.modif);
-			Buildings.update({id: id}, that.building);
+			that.appartment = angular.copy(that.modif);
+			Appartments.update({id: id}, that.appartment);
 		}
 
 		this.destroy = function (id) {
-			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet immeuble ?');
+			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet appartement ?');
 
 			if (confirm) {
-				Buildings.remove({id: id}, function () {
+				Appartments.remove({id: id}, function () {
 					$location.url('/');
 				});
 			}
 		}
-}]);*/
+}]);

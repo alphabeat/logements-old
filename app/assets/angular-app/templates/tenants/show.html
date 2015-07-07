@@ -1,9 +1,9 @@
-<h3>{{tenant.tenant.firstname}} {{tenant.tenant.lastname}}</h3>
+<h3>{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}</h3>
 
 <button class="btn btn-danger pull-right"
-	ng-click="tenant.destroy(tenant.tenant.id)">Supprimer</button>
+	ng-click="tenants.destroy(tenants.tenant.id); pages.resetMode()">Supprimer</button>
 <button class="btn btn-warning pull-right" 
-	ng-click="pages.changeMode(['edit', tenant.tenant.id])">
+	ng-click="pages.changeMode(['edit', tenants.tenant.id])">
 	Modifier
 </button>
 
@@ -20,14 +20,14 @@
 	<strong>Solde (à payer)</strong><br />
 </div>
 <div class="col-sm-6 col-md-6">
-	{{tenant.tenant.birthdate | date:'d/M/y'}} <br />
-	0{{tenant.tenant.phone}} <br />
-	0{{tenant.tenant.parentsphone}} <br />
-	<a href="mailto:{{showTenant.tenant.email}}">{{tenant.tenant.email}}</a> <br />
-	{{tenant.tenant.startdate | date:'d/M/y'}} <br />
-	{{tenant.tenant.enddate | date:'d/M/y'}} <br />
-	{{tenant.tenant.cafamount}} € <br />
-	{{tenant.tenant.rent}} € <br />
-	{{ (tenant.tenant.internet) ? "Oui" : "Non" }} <br />
-	{{tenant.tenant.solde}} € <br />
+	{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
+	0{{tenants.tenant.phone}} <br />
+	0{{tenants.tenant.parentsphone}} <br />
+	<a href="mailto:{{tenants.tenant.email}}">{{tenants.tenant.email}}</a> <br />
+	{{tenants.tenant.startdate | date:'d/M/y'}} <br />
+	{{tenants.tenant.enddate | date:'d/M/y'}} <br />
+	{{tenants.tenant.cafamount}} € <br />
+	{{tenants.tenant.rent}} € <br />
+	{{ (tenants.tenant.internet) ? "Oui" : "Non" }} <br />
+	{{tenants.tenant.solde}} € <br />
 </div>

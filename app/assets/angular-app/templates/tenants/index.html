@@ -13,11 +13,9 @@
 		<h1>Sélectionnez un locataire</h1>
 	</div>
 
-  <div ng-controller="TenantDetailsController as tenant">
-	  <show-tenant ng-show="pages.mode[0] === 'show'"></show-tenant>
+	<show-tenant ng-show="pages.mode[0] === 'show'"></show-tenant>
 
-	  <edit-tenant ng-show="pages.mode[0] === 'edit'"></edit-tenant>
+	<edit-tenant ng-show="pages.mode[0] === 'edit'"></edit-tenant>
     
     <new-tenant ng-show="pages.mode[0] === 'new'"></new-tenant>
-  </div>
 </div>
