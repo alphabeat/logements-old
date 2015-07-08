@@ -30,7 +30,9 @@ app.controller('TenantsIndexController', ['Tenants', '$routeParams', '$location'
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer ce locataire ?');
 
 			if (confirm) {
-				Tenants.remove({id: id});
+				Tenants.remove({id: id}, function () {
+          that.items = Tenants.query();
+        });
 			}
 		}
 	                                           

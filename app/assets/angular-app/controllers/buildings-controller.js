@@ -30,7 +30,9 @@ app.controller('BuildingsIndexController', ['$routeParams', 'Buildings', '$locat
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet immeuble ?');
 
 			if (confirm) {
-				Buildings.remove({id: id});
+				Buildings.remove({id: id}, function () {
+          that.items = Buildings.query();
+        });
 			}
 		}
 
