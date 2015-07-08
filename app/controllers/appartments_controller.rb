@@ -1,7 +1,7 @@
 class AppartmentsController < ApplicationController
-	before_action :get_appartment, :only => [:show, :edit, :update, :destroy]
+	before_action :get_appart, :only => [:show, :edit, :update, :destroy]
 
-	def get_appartment
+	def get_appart
 		@appartment = Appartment.find(params[:id])
 	end
 
@@ -48,7 +48,8 @@ class AppartmentsController < ApplicationController
 				:building_id,
 				:number,
 				:area,
-				:rent
+				:rent,
+				:tenant_id
 			])
 	end
 end

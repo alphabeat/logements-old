@@ -2,8 +2,14 @@
 	<div class="list-item" ng-repeat="tenant in tenants.items | orderBy:'lastname'"
 		ng-click="pages.changeMode(['show', tenant.id]);">
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
-		<h5>
-			{{tenant.appartment_id}}
+		<h5 ng-controller="AppartmentsIndexController as appartments">
+			<span ng-repeat="appart in appartments.items | filter: { id: tenant.appartment_id }">
+				<span ng-controller="BuildingsIndexController as buildings">
+					<span ng-repeat="building in buildings.items | filter: { id: appart.building_id }">
+						{{building.name}} - N°{{appart.number}}
+					</span>
+				</span>
+			</span>
 		</h5>
 	</div>
 </div>

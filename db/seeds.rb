@@ -36,6 +36,27 @@ Building.create({
   number_of_appartments: 35
 })
 
+Appartment.create({
+  number: 12,
+  building_id: 2,
+  area: 60,
+  rent: 800
+})
+
+Appartment.create({
+  number: 141,
+  building_id: 1,
+  area: 27,
+  rent: 599
+})
+
+Appartment.create({
+  number: 10,
+  building_id: 3,
+  area: 60,
+  rent: 1400
+})
+
 Tenant.create({lastname: 'Kilo', 
   firstname: 'Julien', 
   birthdate: '21-10-1992', 
@@ -49,7 +70,7 @@ Tenant.create({lastname: 'Kilo',
   internet:false,
 	solde:'400',
   haspaid:true,
-	appartment_id:'1'
+	appartment_id:'2'
 })
 
 Tenant.create({lastname: 'Kilo', 
@@ -65,15 +86,15 @@ Tenant.create({lastname: 'Kilo',
   internet:true,
 	solde:'500',
   haspaid:true,
-	appartment_id:'2'
+	appartment_id:'3'
 })
 
 Tenant.create({lastname: 'Fayad', 
   firstname: 'Sarah', 
   birthdate: '18-11-1993', 
-  phone:'', 
+  phone:'617679301', 
   parentsphone:'477712069', 
-  email:'olivier.kilo@centrale-marseille.fr',
+  email:'fayad_sarah@yahoo.fr',
   startdate:'01-09-2014',
 	enddate:'31-12-2015',
 	cafamount:'0',
@@ -81,5 +102,5 @@ Tenant.create({lastname: 'Fayad',
   internet:true,
 	solde:'500',
   haspaid:true,
-	appartment_id:'2'
+	appartment_id:'1'
 })

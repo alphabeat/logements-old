@@ -1,13 +1,17 @@
-<h3>{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}</h3>
+<h3>
+	{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}
+	<button class="btn btn-danger pull-right" style="margin-left:5px;" ng-click="tenants.destroy(tenants.tenant.id); pages.resetMode()">
+		<i class="fa fa-trash-o"></i>
+	</button>
+	<button class="btn btn-warning pull-right" ng-click="pages.changeMode(['edit', tenants.tenant.id])">
+		<i class="fa fa-pencil"></i>
+	</button>
+</h3>
 
-<button class="btn btn-danger pull-right"
-	ng-click="tenants.destroy(tenants.tenant.id); pages.resetMode()">Supprimer</button>
-<button class="btn btn-warning pull-right" 
-	ng-click="pages.changeMode(['edit', tenants.tenant.id])">
-	Modifier
-</button>
+
 
 <div class="col-sm-3 col-md-3 text-middle">
+	<strong>Appartement</strong><br />
 	<strong>Date de naissance</strong><br />
 	<strong>Téléphone</strong><br />
 	<strong>Téléphone des parents</strong><br />
@@ -20,6 +24,15 @@
 	<strong>Solde (à payer)</strong><br />
 </div>
 <div class="col-sm-6 col-md-6">
+	<span ng-controller="AppartmentsIndexController as appartments">
+		<span ng-repeat="appart in appartments.items | filter: { id: tenants.tenant.appartment_id }">
+			<span ng-controller="BuildingsIndexController as buildings">
+				<span ng-repeat="building in buildings.items | filter: { id: appart.building_id }">
+					{{building.name}} - N°{{appart.number}}
+				</span>
+			</span>
+		</span>
+	</span><br />
 	{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
 	0{{tenants.tenant.phone}} <br />
 	0{{tenants.tenant.parentsphone}} <br />

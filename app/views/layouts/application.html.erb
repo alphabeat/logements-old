@@ -16,21 +16,21 @@
       <ul class="nav nav-sidebar">
         <li ng-class="{ active : pages.page === 1 }">
           <a href="#/buildings" ng-click="pages.switchView(1)">
-            <!-- <span class="glyphicon glyphicon-home"></span> -->
-             Immeubles / Maisons
+            <i class="fa fa-home fa-3"></i>
+            Immeubles / Maisons
           </a>
         </li>
         <li ng-class="{ active : pages.page === 2 }">
           <a href="#/tenants" ng-click="pages.switchView(2)">
-            <!-- <span class="glyphicon glyphicon-user"></span> -->
-             Locataires
+            <i class="fa fa-user fa-3"></i>
+            Locataires
           </a>
         </li>
       </ul>
     </div>
 
     <div ng-view="ng-view"></div>
-    <div class="add" ng-click="pages.changeMode(['new', 'new'])">+</div>
+    <div class="add" ng-click="pages.changeMode(['new', 'new'])"><i class="fa fa-plus"></i></div>
   </div>
 </div>
 

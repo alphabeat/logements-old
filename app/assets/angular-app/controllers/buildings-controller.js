@@ -31,8 +31,8 @@ app.controller('BuildingsIndexController', ['$routeParams', 'Buildings', '$locat
 
 			if (confirm) {
 				Buildings.remove({id: id}, function () {
-          that.items = Buildings.query();
-        });
+		          that.items = Buildings.query();
+		        });
 			}
 		}
 

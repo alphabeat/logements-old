@@ -1,8 +1,12 @@
-<h3>{{buildings.building.name}}</h3>
-<button class="btn btn-danger pull-right" 
-	ng-click="buildings.destroy(buildings.building.id); pages.resetMode()">Supprimer</button>
-<button class="btn btn-warning pull-right" 
-	ng-click="pages.changeMode(['edit', buildings.building.id])">Modifier</button>
+<h3>
+	{{buildings.building.name}}
+	<button class="btn btn-danger pull-right" style="margin-left:5px" ng-click="buildings.destroy(buildings.building.id); pages.resetMode()">
+		<i class="fa fa-trash-o"></i>
+	</button>
+	<button class="btn btn-warning pull-right" ng-click="pages.changeMode(['edit', buildings.building.id])">
+		<i class="fa fa-pencil"></i>
+	</button>
+</h3>
 
 <h4>
 	{{buildings.building.street_number}}, {{buildings.building.street_type}} {{buildings.building.street_name}} 
@@ -10,7 +14,9 @@
 </h4>
 
 <div ng-controller="AppartmentsIndexController as appartments">
-		<h3>Liste des appartements de l'immeuble</h3>
+	<h3>Liste des appartements de l'immeuble</h3>
+	<form class="form-inline" ng-submit="appartments.create(buildings.building.id)">
+		<div class="table-responsive">
 		<table class="table">
 			<thead>
 				<tr>
@@ -18,17 +24,52 @@
 					<th>Surface</th>
 					<th>Loyer</th>
 					<th>Locataire</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
-			<tbody ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == building.building.id">
+			<tbody ng-repeat="appart in appartments.items | filter: { building_id: buildings.building.id }">
 				<tr>
 					<td>{{appart.number}}</td>
-					<td>{{appart.area | number:2}} m²</td>
-					<td>{{appart.rent | number:2}} €</td>
+					<td>{{appart.area}}</td>
+					<td>{{appart.rent}}</td>
+					<td ng-controller="TenantsIndexController as tenants">
+						<span ng-repeat="tenant in filteredTenants = (tenants.items | filter: { appartment_id: appart.id })">
+							{{tenant.firstname}} {{tenant.lastname}}
+						</span>
+						<span ng-hide="filteredTenants.length">
+							Aucun
+						</span>
+					</td>
 					<td>
+						<button type="button" class="btn btn-sm btn-warning" ng-click="update">
+							<i class="fa fa-pencil fa-lg"></i>
+						</button>
+						<button type="button" class="btn btn-sm btn-danger" ng-click="appartments.destroy(appart.id)">
+							<i class="fa fa-trash-o fa-lg"></i>
+						</button>
 					</td>
 				</tr>
 			</tbody>
+			<tfoot>
+				<tr ng-show="appartments.appartment.number">
+					<td>{{appartments.appartment.number}}</td>
+					<td>{{appartments.appartment.area | number:2}} m²</td>
+					<td>{{appartments.appartment.rent | number:2}} €</td>
+					<td>Aucun</td>
+				</tr>
+				<tr>
+					<td><input type="text" class="form-control" ng-model="appartments.appartment.number"/></td>
+					<td><input type="text" class="form-control" ng-model="appartments.appartment.area"/></td>
+					<td><input type="text" class="form-control" ng-model="appartments.appartment.rent"/></td>
+					<td></td>
+					<td><button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button></td>
+				</tr>
+			</tfoot>
 		</table>
-	</div>
+		</div>
+	</form>
 </div>
+
+<!--
+	 ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == building.building.id"
+-->

@@ -1,6 +1,29 @@
 <h1>Modification du locataire</h1>
 <form class="form-horizontal" ng-submit="tenants.update(tenants.modif.id)">
 	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="button" class="btn btn-info" ng-click="changeAppart=true" ng-hide="changeAppart">
+				Changer d'appartment
+			</button>
+		</div>
+	</div>
+	<div class="form-group" ng-show="changeAppart">
+		<label class="col-sm-2 control-label">Immeuble</label>
+		<div class="col-sm-4" ng-controller="BuildingsIndexController as buildings">
+			<select class="form-control" ng-model="tenants.building" convert-to-number>
+				<option ng-repeat="building in buildings.items" value="{{building.id}}">{{building.name}}</option>
+			</select>
+		</div>
+		<label class="col-sm-2 control-label">Appartement</label>
+		<div ng-show="tenants.building" class="col-sm-4" ng-controller="AppartmentsIndexController as appartments">
+			<select class="form-control" ng-model="tenants.modif.appartment_id" convert-to-number>
+				<option ng-repeat="appart in appartments.items | filter: { building_id: tenants.building }" value="{{appart.id}}">
+					{{appart.number}}
+				</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
 			<input class="form-control" type="text" ng-model="tenants.modif.firstname" />
