@@ -21,4 +21,12 @@ angular.module('app', ['ngRoute', 'ngResource'])
 	   			.otherwise('/buildings');
 
 	   		$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token').attr('content');
+/*	   		$httpProvider.interceptors.push(function ($q) {
+	   			return {
+	   				'response': function (response) {
+	   					console.log(response);
+	   					return response;
+	   				}
+	   			}
+	   		});*/
 	   }]);

@@ -1,5 +1,9 @@
 <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-	<div class="list-item" ng-repeat="tenant in tenants.items | orderBy:'lastname'"
+	<div class="input-group">
+		<input type="text" class="form-control" ng-model="searchText"/>
+		<div class="input-group-addon"><i class="fa fa-search"></i></div>
+	</div>
+	<div class="list-item" ng-repeat="tenant in tenants.items | filter:searchText | orderBy:'lastname'"
 		ng-click="tenants.showTenant(tenant)">
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
 		<h5 ng-controller="AppartmentsIndexController as appartments">

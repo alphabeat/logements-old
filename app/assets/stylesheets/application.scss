@@ -17,7 +17,6 @@
 
 .navbar {
 	min-height: 100px;
-  border-bottom: 1px solid black;
   z-index: 2000;
   border-radius: 0;
 }
@@ -51,7 +50,7 @@
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: rgba(217, 83, 79, 0.3);
-    border-right: 1px solid black;
+    border-right: 1px solid $brand-danger;
   }
 }
 
@@ -83,7 +82,7 @@
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: rgba(217, 83, 79, 0.1);
-  border-right: 1px solid black;
+  border-right: 1px solid $brand-danger;
   padding: 0;
   height: calc(100% - 100px);
 }
@@ -93,7 +92,7 @@
   padding: 10px;
   cursor: pointer;
   display: inline-block;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $brand-danger;
 }
 
 .list-item:hover {
@@ -117,7 +116,7 @@
 }
 
 .add {
-  background-color: #32831E;
+  background-color: $brand-success;
   position: fixed;
   bottom: 25px;
   right: 25px;
@@ -142,14 +141,11 @@
   max-height: 12px;
 }
 
-input.ng-invalid.ng-dirty {
-  box-shadow: 0 1px 0 1px rgba(255,0,0,0.5), 1px 0 1px 0 rgba(255,0,0,0.5);
-}
-
-input.ng-valid.ng-dirty {
-  box-shadow: 0 1px 0 1px rgba(0,255,0,0.5), 1px 0 1px 0 rgba(0,255,0,0.5);
-}
-
 .form-inline .form-control {
   width: 100px;
+}
+
+.input-group-addon {
+  background-color: $brand-success;
+  color: #fff;
 }

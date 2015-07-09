@@ -19,6 +19,7 @@ app.factory('Buildings', ['$resource', function ($resource) {
 		'/api/buildings/:id', 
 		{ id: '@id' },
     {
+      save: {method: 'POST'},
       get: {method: 'GET'},
       query: {method: 'GET', isArray: true},
       'update': {method: 'PUT'}
