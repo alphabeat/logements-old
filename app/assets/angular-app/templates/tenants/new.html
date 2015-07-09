@@ -1,5 +1,5 @@
 <h1>Ajout d'un locataire</h1>
-<form class="form-horizontal" ng-submit="tenants.create()">
+<form class="form-horizontal" ng-submit="tenants.save()">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Immeuble</label>
 		<div class="col-sm-4" ng-controller="BuildingsIndexController as buildings">
@@ -79,7 +79,7 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
 			<button type="submit" class="btn btn-success">Ajouter</button>
-			<button type="button" class="btn btn-warning" ng-click="pages.resetMode()">Annuler</button>
+			<button type="button" class="btn btn-warning" ng-click="tenants.cancel()">Annuler</button>
 		</div>
 	</div>
 </form>

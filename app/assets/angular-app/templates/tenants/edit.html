@@ -1,5 +1,5 @@
 <h1>Modification du locataire</h1>
-<form class="form-horizontal" ng-submit="tenants.update(tenants.modif.id)">
+<form class="form-horizontal" ng-submit="tenants.save()">
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="button" class="btn btn-info" ng-click="changeAppart=true" ng-hide="changeAppart">
@@ -16,7 +16,7 @@
 		</div>
 		<label class="col-sm-2 control-label">Appartement</label>
 		<div ng-show="tenants.building" class="col-sm-4" ng-controller="AppartmentsIndexController as appartments">
-			<select class="form-control" ng-model="tenants.modif.appartment_id" convert-to-number>
+			<select class="form-control" ng-model="tenants.tenant.appartment_id" convert-to-number>
 				<option ng-repeat="appart in appartments.items | filter: { building_id: tenants.building }" value="{{appart.id}}">
 					{{appart.number}}
 				</option>
@@ -26,67 +26,67 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Prénom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.firstname" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.firstname" />
 		</div>
 		<label class="col-sm-1 control-label">Nom</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.lastname" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.lastname" />
 		</div>
 		<label class="col-sm-3 control-label">Date de naissance</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.birthdate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.birthdate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Téléphone</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenants.modif.phone" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.phone" />
 		</div>
 		<label class="col-sm-3 control-label">Téléphone des parents</label>
 		<div class="col-sm-3">
-			<input class="form-control" type="text" ng-model="tenants.modif.parentsphone" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.parentsphone" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-9">
-			<input class="form-control" type="text" ng-model="tenants.modif.email" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.email" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Date d'entrée</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.startdate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.startdate" />
 		</div>
 		<label class="col-sm-2 control-label">Date de sortie</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.enddate" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.enddate" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Allocation (CAF)</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.cafamount" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.cafamount" />
 		</div>
 		<label class="col-sm-2 control-label">Loyer</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.rent" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.rent" />
 		</div>
 		<label class="col-sm-3 control-label">Internet ?</label>
 		<div class="col-sm-1 checkbox-inline">
-			<input type="checkbox" ng-model="tenants.modif.internet" />
+			<input type="checkbox" ng-model="tenants.tenant.internet" />
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Solde</label>
 		<div class="col-sm-2">
-			<input class="form-control" type="text" ng-model="tenants.modif.solde" />
+			<input class="form-control" type="text" ng-model="tenants.tenant.solde" />
 		</div>
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
-			<button type="submit" class="btn btn-success" ng-click="tenants.save(tenants.modif)">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="tenants.showTenant(tenants.tenant)">Annuler</button>
+			<button type="submit" class="btn btn-success">Modifier</button>
+			<button type="button" class="btn btn-warning" ng-click="tenants.cancel()">Annuler</button>
 		</div>
 	</div>
 </form>

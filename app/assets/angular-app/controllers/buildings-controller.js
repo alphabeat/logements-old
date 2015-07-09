@@ -2,38 +2,65 @@
 
 var app = angular.module('app');
 
-app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings', '$location', '$window', 'filterFilter',
-	function ($routeParams, Data, Buildings, $location, $window, filterFilter) {
+app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings', '$location', '$window', '$filter',
+	function ($routeParams, Data, Buildings, $location, $window, $filter) {
 		var that = this;
 		this.items = Data.buildings;
 		this.building = {};
 		this.modif = {};
-    this.buildingToEdit = {};
 		
-		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.building = filterFilter(that.items, {id: $routeParams.id});
-      that.buildingToEdit = angular.copy(that.building);
+		this.showBuilding = function (building) {
+			that.isShowVisible = true;
+			that.building = building;
 		}
 
-		this.update = function(id) {
-			Buildings.update({id: id}, that.modif, function () {
-				that.items = Data.buildings = Buildings.query(function () {
-          that.building = filterFilter(that.items, {id: id});
-        });
-			});
+		this.editBuilding = function () {
+			that.isShowVisible = false;
+			that.isEditVisible = true;
+			that.modif = angular.copy(that.building);
 		}
 
-		this.reset = function () {
-			that.buildingToEdit = angular.copy(that.building);
+		this.newBuilding = function () {
+			that.isShowVisible = false;
+			that.isEditVisible = false;
+			that.isNewVisible = true;
+			that.building = {};
+		}
+
+		this.update = function(building) {
+			Buildings.update({id: building.id}, building);
+		}
+
+		this.cancel = function () {
+			if (that.building.id) {
+				that.isEditVisible = false;
+				angular.extend(that.building, that.modif);
+				that.showBuilding(that.building);
+			} else {
+				that.isNewVisible = false;
+				that.building = {};
+			}
+		}
+
+		this.save = function () {
+			if (that.building.id) {
+				that.isEditVisible = false;
+				that.update(that.building);
+				that.showBuilding(that.building);
+			} else {
+				that.isNewVisible = false;
+				that.create();
+			}
 		}
 
 		this.destroy = function (id) {
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet immeuble ?');
 
 			if (confirm) {
-				var remove = Buildings.remove({id: id}, function () {
-          that.items = Buildings.query();
-        });
+				Buildings.remove({id: id}, function () {
+          			that.isShowVisible = false;
+          			that.items = $filter('filter')(that.items, {id: '!'+id});
+        		});
 			}
 		}
 
@@ -41,8 +68,8 @@ app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings',
 			var newBuilding = new Buildings(that.building);
 
 			newBuilding.$save(function () {
-        that.items = Data.buildings = Buildings.query();
-				$location.url('/buildings');
+       			that.items.push(that.building);
+       			that.showBuilding(that.building);
 			}, function (response) {
 				console.log(response.data.errors);
 			});

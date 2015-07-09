@@ -2,8 +2,8 @@
 
 var app = angular.module('app');
 
-app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$location', '$window', 'filterFilter',
-	function (Data, Tenants, $routeParams, $location, $window, filterFilter) {
+app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$location', '$window', '$filter',
+	function (Data, Tenants, $routeParams, $location, $window, $filter) {
 		var that = this;
 		this.items = Data.tenants;
 		this.tenant = {};
@@ -11,27 +11,45 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
 
     this.showTenant = function (tenant) {
       that.isShowVisible = true;
-      that.isEditVisible = false;
       that.tenant = tenant;
     }
     
-    this.editTenant = function (tenant) {
+    this.editTenant = function () {
       that.isShowVisible = false;
       that.isEditVisible = true;
-      that.modif = angular.copy(tenant);
+      that.modif = angular.copy(that.tenant);
+    }
+
+    this.newTenant = function () {
+      that.isShowVisible = false;
+      that.isEditVisible = false;
+      that.isNewVisible = true;
+      that.tenant = {};
     }
 
 		this.update = function (tenant) {
-	    	Tenants.update({id: tenant.id}, tenant, function () {
-          that.items = Data.tenants = Tenants.query();
-        });
+	    	Tenants.update({id: tenant.id}, tenant);
 		}
+
+    this.cancel = function () {
+      if (that.tenant.id) {
+        that.isEditVisible = false;
+        angular.extend(that.tenant, that.modif);
+        that.showTenant(that.tenant);
+      } else {
+        that.isNewVisible = false;
+        that.tenant = {};
+      }
+    }
     
-    this.save = function (tenant) {
-      that.isEditVisible = false;
-      if (tenant.id) {
-        that.update(tenant);
-        that.showTenant(tenant);
+    this.save = function () {
+      if (that.tenant.id) {
+        that.isEditVisible = false;
+        that.update(that.tenant);
+        that.showTenant(that.tenant);
+      } else {
+        that.isNewVisible = false;
+        that.create();
       }
     }
 
@@ -40,8 +58,8 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
 
 			if (confirm) {
 				Tenants.remove({id: id}, function () {
-          that.items = Data.tenants = Tenants.query();
           that.isShowVisible = false;
+          that.items = $filter('filter')(that.items, {id: '!'+id});
         });
 			}
 		}
@@ -49,9 +67,9 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
     this.create = function () {
       var newTenant = new Tenants(that.tenant);
 
-      newTenant.$save(function() {
-        $location.url('/tenants');
-        that.items = Data.tenants = Tenants.query();
+      newTenant.$save(function (response) {
+        that.items.push(that.tenant);
+        that.showTenant(that.tenant);
       }, function (response) {
         console.log(response.data.errors);
       });

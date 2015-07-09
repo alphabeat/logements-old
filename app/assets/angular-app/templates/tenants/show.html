@@ -1,9 +1,9 @@
 <h3>
 	{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}
-	<button class="btn btn-danger pull-right" style="margin-left:5px;" ng-click="tenants.destroy(tenants.tenant.id); pages.resetMode()">
+	<button class="btn btn-danger pull-right" style="margin-left:5px;" ng-click="tenants.destroy(tenants.tenant.id)">
 		<i class="fa fa-trash-o"></i>
 	</button>
-	<button class="btn btn-warning pull-right" ng-click="tenants.editTenant(tenants.tenant)">
+	<button class="btn btn-warning pull-right" ng-click="tenants.editTenant()">
 		<i class="fa fa-pencil"></i>
 	</button>
 </h3>
