@@ -37,3 +37,15 @@ app.factory('Tenants', ['$resource', function ($resource) {
     }
   );
 }]);
+
+app.factory('Suppliers', ['$resource', function ($resource) {
+  return $resource(
+    '/api/suppliers/:id',
+    {id: '@id'},
+    {
+      get: {method: 'GET'},
+      query: {method: 'GET', isArray: true},
+      'update': {method: 'PUT'}
+    }
+  );
+}]);

@@ -58,8 +58,8 @@
 					<td>Aucun</td>
 				</tr>
 				<tr>
-					<td><input type="text" class="form-control" ng-model="appartments.appartment.number"/></td>
-					<td><input type="text" class="form-control" ng-model="appartments.appartment.area"/></td>
+					<td><input type="text" class="form-control" ng-model="appartments.appartment.number" required /></td>
+					<td><input type="text" class="form-control" ng-model="appartments.appartment.area" required/></td>
 					<td><input type="text" class="form-control" ng-model="appartments.appartment.rent"/></td>
 					<td></td>
 					<td><button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button></td>
@@ -69,7 +69,3 @@
 		</div>
 	</form>
 </div>
-
-<!--
-	 ng-repeat="appart in appartments.appartments" ng-if="appart.building_id == building.building.id"
--->
