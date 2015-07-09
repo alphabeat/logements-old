@@ -2,36 +2,37 @@
 
 var app = angular.module('app');
 
-app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$location', '$window', 
-	function (Data, Tenants, $routeParams, $location, $window) {
+app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$location', '$window', 'filterFilter',
+	function (Data, Tenants, $routeParams, $location, $window, filterFilter) {
 		var that = this;
 		this.items = Data.tenants;
 		this.tenant = {};
 		this.modif = {};
+    this.tenantToEdit = {};
 
 		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.tenant = this.items[$routeParams.id - 1];
-			that.modif = angular.copy(that.tenant);
+			that.tenant = filterFilter(that.items, {id: $routeParams.id});
+      that.tenantToEdit = angular.copy(that.tenant);
 		}
 
 		this.update = function (id) {
-	    	that.tenant = angular.copy(that.modif);
-	    	Tenants.update({id: id}, that.tenant, function () {
-	    		that.items = Data.tenants = Tenants.query();
+	    	Tenants.update({id: id}, that.modif, function () {
+	    		that.items = Data.tenants = Tenants.query(function () {
+            that.tenant = filterFilter(that.items, {id: id});
+          });
 	    	});
 		}
 
 		this.reset = function () {
-			that.modif = angular.copy(that.tenant);
+			that.tenantToEdit = angular.copy(that.tenant);
 		}
 
 		this.destroy = function (id) {
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer ce locataire ?');
 
 			if (confirm) {
-				Tenants.remove({id: id}, function () {
-          that.items = Data.tenants = Tenants.query();
-        });
+				Tenants.remove({id: id});
+        that.items = Data.tenants = Tenants.query();
 			}
 		}
 	                                           
@@ -39,8 +40,8 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
 		    var newTenant = new Tenants(that.tenant);
 
 		    newTenant.$save(function() {
+          $location.url('/tenants');
           that.items = Data.tenants = Tenants.query();
-		    	$location.url('/tenants');
 		    }, function (response) {
 		    	console.log(response.data.errors);
 		    });

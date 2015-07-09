@@ -1,21 +1,22 @@
+<div ng-repeat="building in buildings.building">
 <h3>
-	{{buildings.building.name}}
-	<button class="btn btn-danger pull-right" style="margin-left:5px" ng-click="buildings.destroy(buildings.building.id); pages.resetMode()">
+	{{building.name}}
+	<button class="btn btn-danger pull-right" style="margin-left:5px" ng-click="buildings.destroy(building.id); pages.resetMode()">
 		<i class="fa fa-trash-o"></i>
 	</button>
-	<button class="btn btn-warning pull-right" ng-click="pages.changeMode(['edit', buildings.building.id])">
+	<button class="btn btn-warning pull-right" ng-click="pages.changeMode(['edit', building.id])">
 		<i class="fa fa-pencil"></i>
 	</button>
 </h3>
 
 <h4>
-	{{buildings.building.street_number}}, {{buildings.building.street_type}} {{buildings.building.street_name}} 
-	{{buildings.building.zipcode}} - {{buildings.building.city}}
+	{{building.street_number}}, {{building.street_type}} {{building.street_name}} 
+	{{building.zipcode}} - {{building.city}}
 </h4>
 
 <div ng-controller="AppartmentsIndexController as appartments">
 	<h3>Liste des appartements de l'immeuble</h3>
-	<form class="form-inline" ng-submit="appartments.create(buildings.building.id)">
+	<form class="form-inline" ng-submit="appartments.create(building.id)">
 		<div class="table-responsive">
 		<table class="table">
 			<thead>
@@ -27,7 +28,7 @@
 					<th>Actions</th>
 				</tr>
 			</thead>
-			<tbody ng-repeat="appart in appartments.items | filter: { building_id: buildings.building.id }">
+			<tbody ng-repeat="appart in appartments.items | filter: { building_id: building.id }">
 				<tr>
 					<td>{{appart.number}}</td>
 					<td>{{appart.area}}</td>
@@ -68,4 +69,5 @@
 		</table>
 		</div>
 	</form>
+</div>
 </div>

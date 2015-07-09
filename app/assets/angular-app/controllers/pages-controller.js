@@ -18,9 +18,9 @@ app.controller('PagesController', ['$location', function ($location) {
   
     this.resetMode = function () {
       	that.mode = null;
-    	if (that.page == 1) 
-			$location.url('/buildings');
-		else if (that.page == 2)
-			$location.url('/tenants');
-    }
+        if (that.page == 1) 
+          $location.url('/buildings');
+        else if (that.page == 2)
+          $location.url('/tenants');
+      }
 }]);

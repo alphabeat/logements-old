@@ -2,36 +2,38 @@
 
 var app = angular.module('app');
 
-app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings', '$location', '$window',
-	function ($routeParams, Data, Buildings, $location, $window) {
+app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings', '$location', '$window', 'filterFilter',
+	function ($routeParams, Data, Buildings, $location, $window, filterFilter) {
 		var that = this;
 		this.items = Data.buildings;
 		this.building = {};
 		this.modif = {};
+    this.buildingToEdit = {};
 		
 		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.building = that.items[$routeParams.id - 1];
-			that.modif = angular.copy(that.building);
+			that.building = filterFilter(that.items, {id: $routeParams.id});
+      that.buildingToEdit = angular.copy(that.building);
 		}
 
 		this.update = function(id) {
-			that.building = angular.copy(that.modif);
-			Buildings.update({id: id}, that.building, function () {
-				that.items = Data.buildings = Buildings.query();
+			Buildings.update({id: id}, that.modif, function () {
+				that.items = Data.buildings = Buildings.query(function () {
+          that.building = filterFilter(that.items, {id: id});
+        });
 			});
 		}
 
 		this.reset = function () {
-			that.modif = angular.copy(that.building);
+			that.buildingToEdit = angular.copy(that.building);
 		}
 
 		this.destroy = function (id) {
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet immeuble ?');
 
 			if (confirm) {
-				Buildings.remove({id: id}, function () {
-		          that.items = Data.buildings = Buildings.query();
-		        });
+				var remove = Buildings.remove({id: id}, function () {
+          that.items = Buildings.query();
+        });
 			}
 		}
 

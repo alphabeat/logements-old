@@ -1,3 +1,5 @@
+<div ng-repeat="modif in tenants.tenantToEdit">
+  <span ng-init="tenants.modif = modif"></span>
 <h1>Modification du locataire</h1>
 <form class="form-horizontal" ng-submit="tenants.update(tenants.modif.id)">
 	<div class="form-group">
@@ -90,3 +92,4 @@
 		</div>
 	</div>
 </form>
+</div>
