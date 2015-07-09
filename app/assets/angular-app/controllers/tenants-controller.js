@@ -8,42 +8,52 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
 		this.items = Data.tenants;
 		this.tenant = {};
 		this.modif = {};
-    this.tenantToEdit = {};
 
-		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.tenant = filterFilter(that.items, {id: $routeParams.id});
-      that.tenantToEdit = angular.copy(that.tenant);
-		}
+    this.showTenant = function (tenant) {
+      that.isShowVisible = true;
+      that.isEditVisible = false;
+      that.tenant = tenant;
+    }
+    
+    this.editTenant = function (tenant) {
+      that.isShowVisible = false;
+      that.isEditVisible = true;
+      that.modif = angular.copy(tenant);
+    }
 
-		this.update = function (id) {
-	    	Tenants.update({id: id}, that.modif, function () {
-	    		that.items = Data.tenants = Tenants.query(function () {
-            that.tenant = filterFilter(that.items, {id: id});
-          });
-	    	});
+		this.update = function (tenant) {
+	    	Tenants.update({id: tenant.id}, tenant, function () {
+          that.items = Data.tenants = Tenants.query();
+        });
 		}
-
-		this.reset = function () {
-			that.tenantToEdit = angular.copy(that.tenant);
-		}
+    
+    this.save = function (tenant) {
+      that.isEditVisible = false;
+      if (tenant.id) {
+        that.update(tenant);
+        that.showTenant(tenant);
+      }
+    }
 
 		this.destroy = function (id) {
 			var confirm = $window.confirm('Voulez-vous vraiment supprimer ce locataire ?');
 
 			if (confirm) {
-				Tenants.remove({id: id});
-        that.items = Data.tenants = Tenants.query();
+				Tenants.remove({id: id}, function () {
+          that.items = Data.tenants = Tenants.query();
+          that.isShowVisible = false;
+        });
 			}
 		}
 	                                           
-	  	this.create = function () {
-		    var newTenant = new Tenants(that.tenant);
+    this.create = function () {
+      var newTenant = new Tenants(that.tenant);
 
-		    newTenant.$save(function() {
-          $location.url('/tenants');
-          that.items = Data.tenants = Tenants.query();
-		    }, function (response) {
-		    	console.log(response.data.errors);
-		    });
-  		} 
+      newTenant.$save(function() {
+        $location.url('/tenants');
+        that.items = Data.tenants = Tenants.query();
+      }, function (response) {
+        console.log(response.data.errors);
+      });
+    } 
 }]);

@@ -1,5 +1,3 @@
-<div ng-repeat="modif in tenants.tenantToEdit">
-  <span ng-init="tenants.modif = modif"></span>
 <h1>Modification du locataire</h1>
 <form class="form-horizontal" ng-submit="tenants.update(tenants.modif.id)">
 	<div class="form-group">
@@ -87,8 +85,8 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
-			<button type="submit" class="btn btn-success" ng-click="pages.changeMode(['show', tenants.modif.id])">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="tenants.reset(); pages.changeMode(['show', tenants.modif.id])">Annuler</button>
+			<button type="submit" class="btn btn-success" ng-click="tenants.save(tenants.modif)">Modifier</button>
+			<button type="button" class="btn btn-warning" ng-click="tenants.showTenant(tenants.tenant)">Annuler</button>
 		</div>
 	</div>
 </form>

@@ -1,10 +1,9 @@
-<div ng-repeat="tenant in tenants.tenant">
 <h3>
-	{{tenant.firstname}} {{tenant.lastname}}
-	<button class="btn btn-danger pull-right" style="margin-left:5px;" ng-click="tenants.destroy(tenant.id); pages.resetMode()">
+	{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}
+	<button class="btn btn-danger pull-right" style="margin-left:5px;" ng-click="tenants.destroy(tenants.tenant.id); pages.resetMode()">
 		<i class="fa fa-trash-o"></i>
 	</button>
-	<button class="btn btn-warning pull-right" ng-click="pages.changeMode(['edit', tenant.id])">
+	<button class="btn btn-warning pull-right" ng-click="tenants.editTenant(tenants.tenant)">
 		<i class="fa fa-pencil"></i>
 	</button>
 </h3>
@@ -24,7 +23,7 @@
 </div>
 <div class="col-sm-6 col-md-6">
 	<span ng-controller="AppartmentsIndexController as appartments">
-		<span ng-repeat="appart in appartments.items | filter:{ id: tenant.appartment_id }:true">
+		<span ng-repeat="appart in appartments.items | filter:{ id: tenants.tenant.appartment_id }:true">
 			<span ng-controller="BuildingsIndexController as buildings">
 				<span ng-repeat="building in buildings.items | filter:{ id: appart.building_id }:true">
 					{{building.name}} - N°{{appart.number}}
@@ -32,15 +31,14 @@
 			</span>
 		</span>
 	</span><br />
-	{{tenant.birthdate | date:'d/M/y'}} <br />
-	0{{tenant.phone}} <br />
-	0{{tenant.parentsphone}} <br />
-	<a href="mailto:{{tenant.email}}">{{tenant.email}}</a> <br />
-	{{tenant.startdate | date:'d/M/y'}} <br />
-	{{tenant.enddate | date:'d/M/y'}} <br />
-	{{tenant.cafamount}} € <br />
-	{{tenant.rent}} € <br />
-	{{ (tenant.internet) ? "Oui" : "Non" }} <br />
-	{{tenant.solde}} € <br />
-</div>
+	{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
+	0{{tenants.tenant.phone}} <br />
+	0{{tenants.tenant.parentsphone}} <br />
+	<a href="mailto:{{tenants.tenant.email}}">{{tenants.tenant.email}}</a> <br />
+	{{tenants.tenant.startdate | date:'d/M/y'}} <br />
+	{{tenants.tenant.enddate | date:'d/M/y'}} <br />
+	{{tenants.tenant.cafamount}} € <br />
+	{{tenants.tenant.rent}} € <br />
+	{{ (tenants.tenant.internet) ? "Oui" : "Non" }} <br />
+	{{tenants.tenant.solde}} € <br />
 </div>

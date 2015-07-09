@@ -1,6 +1,6 @@
 <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
 	<div class="list-item" ng-repeat="tenant in tenants.items | orderBy:'lastname'"
-		ng-click="pages.changeMode(['show', tenant.id]);">
+		ng-click="tenants.showTenant(tenant)">
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
 		<h5 ng-controller="AppartmentsIndexController as appartments">
 			<span ng-repeat="appart in appartments.items | filter:{ id: tenant.appartment_id }:true">
@@ -15,13 +15,13 @@
 </div>
 
 <div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">
-	<div ng-hide="pages.mode" class="text-center">
+	<div ng-hide="tenants.isShowVisible || tenants.isEditVisible || tenants.isNewVisible" class="text-center">
 		<h1>Sélectionnez un locataire</h1>
 	</div>
 
-	<show-tenant ng-show="pages.mode[0] === 'show'"></show-tenant>
+	<show-tenant ng-show="tenants.isShowVisible"></show-tenant>
 
-	<edit-tenant ng-show="pages.mode[0] === 'edit'"></edit-tenant>
+	<edit-tenant ng-show="tenants.isEditVisible"></edit-tenant>
     
-    <new-tenant ng-show="pages.mode[0] === 'new'"></new-tenant>
+    <new-tenant ng-show="tenants.isNewVisible"></new-tenant>
 </div>
