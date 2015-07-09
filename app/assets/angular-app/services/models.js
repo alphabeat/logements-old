@@ -49,3 +49,21 @@ app.factory('Suppliers', ['$resource', function ($resource) {
     }
   );
 }]);
+
+app.factory('Data', ['Tenants', 'Buildings', 'Appartments', 'Suppliers', function (Tenants, Buildings, Appartments, Suppliers) {
+  var data = {};
+  
+  if (!data.tenants)
+    data.tenants = Tenants.query();
+  
+  if (!data.buildings)
+    data.buildings = Buildings.query();
+  
+  if (!data.appartments)
+    data.appartments = Appartments.query();
+ 
+  if(!data.suppliers)
+    data.supppliers = Suppliers.query();
+  
+  return data;
+}]);

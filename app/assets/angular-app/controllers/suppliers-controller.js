@@ -2,8 +2,8 @@
 
 var app = angular.module('app');
 
-app.controller('SuppliersIndexController', ['Suppliers', function (Suppliers) {
+app.controller('SuppliersIndexController', ['Data', 'Suppliers', function (Data, Suppliers) {
 	var that = this;
-	this.items = Suppliers.query();
+	this.items = Data.suppliers;
 	this.supplier = {};
 }]);

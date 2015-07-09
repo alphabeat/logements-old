@@ -2,10 +2,10 @@
 
 var app = angular.module('app');
 
-app.controller('AppartmentsIndexController', ['$routeParams', 'Appartments', '$location', '$window',
-	function ($routeParams, Appartments, $location, $window) {
+app.controller('AppartmentsIndexController', ['$routeParams', 'Data', 'Appartments', '$location', '$window',
+	function ($routeParams, Data, Appartments, $location, $window) {
 		var that = this;
-		this.items = Appartments.query();
+		this.items = Data.appartments;
 		this.appartment = {};
 		this.modif = {};
 
@@ -25,8 +25,7 @@ app.controller('AppartmentsIndexController', ['$routeParams', 'Appartments', '$l
 
 			if (confirm) {
 				Appartments.remove({id: id}, function () {
-					that.items = Appartments.query();
-					console.log('OK');
+					that.items = Data.appartments = Appartments.query();
 				});
 			}
 		}
@@ -37,7 +36,7 @@ app.controller('AppartmentsIndexController', ['$routeParams', 'Appartments', '$l
 
 			newAppart.$save(function () {
 				that.appartment = {};
-				that.items = Appartments.query();
+				that.items = Data.appartments = Appartments.query();
 			}, function (response) {
 				console.log(response.data.errors);
 			});

@@ -2,23 +2,22 @@
 
 var app = angular.module('app');
 
-app.controller('TenantsIndexController', ['Tenants', '$routeParams', '$location', '$window', 
-	function (Tenants, $routeParams, $location, $window) {
+app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$location', '$window', 
+	function (Data, Tenants, $routeParams, $location, $window) {
 		var that = this;
-		this.items = Tenants.query();
+		this.items = Data.tenants;
 		this.tenant = {};
 		this.modif = {};
 
 		if ($routeParams.id !== undefined && $routeParams.id !== 'new') {
-			that.tenant = Tenants.get({id: $routeParams.id}, function () {
-				that.modif = angular.copy(that.tenant);
-		  	});
+			that.tenant = this.items[$routeParams.id - 1];
+			that.modif = angular.copy(that.tenant);
 		}
 
 		this.update = function (id) {
 	    	that.tenant = angular.copy(that.modif);
 	    	Tenants.update({id: id}, that.tenant, function () {
-	    		that.items = Tenants.query();
+	    		that.items = Data.tenants = Tenants.query();
 	    	});
 		}
 
@@ -31,7 +30,7 @@ app.controller('TenantsIndexController', ['Tenants', '$routeParams', '$location'
 
 			if (confirm) {
 				Tenants.remove({id: id}, function () {
-          that.items = Tenants.query();
+          that.items = Data.tenants = Tenants.query();
         });
 			}
 		}
@@ -40,6 +39,7 @@ app.controller('TenantsIndexController', ['Tenants', '$routeParams', '$location'
 		    var newTenant = new Tenants(that.tenant);
 
 		    newTenant.$save(function() {
+          that.items = Data.tenants = Tenants.query();
 		    	$location.url('/tenants');
 		    }, function (response) {
 		    	console.log(response.data.errors);
