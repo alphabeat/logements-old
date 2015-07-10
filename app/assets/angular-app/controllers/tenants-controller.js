@@ -60,6 +60,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
 				Tenants.remove({id: id}, function () {
           that.isShowVisible = false;
           that.items = $filter('filter')(that.items, {id: '!'+id});
+          Data.tenants = that.items;
         });
 			}
 		}

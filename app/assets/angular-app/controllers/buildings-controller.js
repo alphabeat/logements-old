@@ -60,6 +60,7 @@ app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings',
 				Buildings.remove({id: id}, function () {
           			that.isShowVisible = false;
           			that.items = $filter('filter')(that.items, {id: '!'+id});
+                Data.buildings = that.items;
         		});
 			}
 		}
