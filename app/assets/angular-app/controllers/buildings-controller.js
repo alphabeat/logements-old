@@ -2,8 +2,7 @@
 
 var app = angular.module('app');
 
-app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings', '$location', '$window', '$filter',
-	function ($routeParams, Data, Buildings, $location, $window, $filter) {
+app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$filter', function (Data, Buildings, $window, $filter) {
 		var that = this;
 		this.items = Data.buildings;
 		this.building = {};

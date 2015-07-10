@@ -3,7 +3,7 @@
 		<input type="text" class="form-control" ng-model="searchText"/>
 		<div class="input-group-addon"><i class="fa fa-search"></i></div>
 	</div>
-	<div class="list-item" ng-repeat="tenant in tenants.items | filter:searchText | orderBy:'lastname'"
+	<div class="list-item" ng-repeat="tenant in filteredTenants = (tenants.items | filter:searchText | orderBy:'lastname')"
 		ng-click="tenants.showTenant(tenant)">
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
 		<h5 ng-controller="AppartmentsIndexController as appartments">
@@ -16,6 +16,9 @@
 			</span>
 		</h5>
 	</div>
+  <div class="text-center" ng-hide="filteredTenants.length">
+    <h3>Aucun locataire trouvé.</h3>
+  </div>
 </div>
 
 <div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">

@@ -1,0 +1,8 @@
+var app = angular.module('app');
+
+app.directive('newSupplier', function () {
+	return {
+		restrict: 'E',
+templateUrl: '<%= asset_path('templates/suppliers/new.html') %>',
+	};
+});

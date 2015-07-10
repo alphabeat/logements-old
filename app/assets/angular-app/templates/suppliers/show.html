@@ -1,0 +1,18 @@
+<h3>
+	{{suppliers.supplier.name}}
+	<button class="btn btn-danger pull-right" style="margin-left:5px" ng-click="suppliers.destroy(suppliers.supplier.id)">
+		<i class="fa fa-trash-o"></i>
+	</button>
+	<button class="btn btn-warning pull-right" ng-click="suppliers.editSupplier()">
+		<i class="fa fa-pencil"></i>
+	</button>
+</h3>
+
+<h4>
+	{{suppliers.supplier.company}}, {{suppliers.supplier.profession}} <br />
+  {{suppliers.supplier.address}}
+</h4>
+
+<h2>
+  Téléphone : {{suppliers.supplier.phone}} <br/>
+</h2>

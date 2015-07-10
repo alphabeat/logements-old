@@ -3,7 +3,7 @@
 		<input type="text" class="form-control" ng-model="searchText"/>
 		<div class="input-group-addon"><i class="fa fa-search"></i></div>
 	</div>
-	<div class="list-item" ng-repeat="building in buildings.items | filter:searchText | orderBy:'name'"
+	<div class="list-item" ng-repeat="building in filteredBuildings = (buildings.items | filter:searchText | orderBy:'name')"
 		ng-click="buildings.showBuilding(building)">
 		<span class="badge pull-right">
 			{{building.number_of_appartments}}
@@ -14,6 +14,9 @@
 			{{building.zipcode}} - {{building.city}}
 		</h5>
 	</div>
+  <div class="text-center" ng-hide="filteredBuildings.length">
+    <h3>Aucun immeuble trouvé</h3>
+  </div>
 </div>
 
 <div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">
@@ -25,7 +28,7 @@
 
 	<edit-building ng-show="buildings.isEditVisible"></edit-building>
 
-	<new-building ng-show="buildings.isNewVisible"></new-buildings>
+	<new-building ng-show="buildings.isNewVisible"></new-building>
 </div>
 
 <div class="add" ng-click="buildings.newBuilding()"><i class="fa fa-plus"></i></div>

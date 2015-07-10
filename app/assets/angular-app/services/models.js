@@ -19,7 +19,6 @@ app.factory('Buildings', ['$resource', function ($resource) {
 		'/api/buildings/:id', 
 		{ id: '@id' },
     {
-      save: {method: 'POST'},
       get: {method: 'GET'},
       query: {method: 'GET', isArray: true},
       'update': {method: 'PUT'}
@@ -64,7 +63,7 @@ app.factory('Data', ['Tenants', 'Buildings', 'Appartments', 'Suppliers', functio
     data.appartments = Appartments.query();
  
   if(!data.suppliers)
-    data.supppliers = Suppliers.query();
+    data.suppliers = Suppliers.query();
   
   return data;
 }]);

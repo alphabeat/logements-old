@@ -1,3 +1,30 @@
 <div class="col-sm-4 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-	<h1>{{suppliers.items}}</h1>
+  <div class="input-group">
+    <input type="text" class="form-control" ng-model="searchText"/>
+		<div class="input-group-addon"><i class="fa fa-search"></i></div>
+  </div>
+  <div class="list-item" ng-repeat="supplier in filteredSuppliers = (suppliers.items | filter:searchText | orderBy:'name')"
+		ng-click="suppliers.showSupplier(supplier)">
+		<h4>{{supplier.name}}</h4>
+		<h5>
+			{{supplier.company}} - {{supplier.profession}}
+		</h5>
+	</div>
+  <div class="text-center" ng-hide="filteredSuppliers.length">
+    <h3>Aucun fournisseur trouvé.</h3>
+  </div>
 </div>
+
+<div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">
+	<div ng-hide="suppliers.isShowVisible || suppliers.isEditVisible || suppliers.isNewVisible" class="text-center">
+		<h1>Sélectionnez un fournisseur</h1>
+	</div>
+
+	<show-supplier ng-show="suppliers.isShowVisible"></show-supplier>
+
+	<edit-supplier ng-show="suppliers.isEditVisible"></edit-supplier>
+
+	<new-supplier ng-show="suppliers.isNewVisible"></new-supplier>
+</div>
+
+<div class="add" ng-click="suppliers.newSupplier()"><i class="fa fa-plus"></i></div>
