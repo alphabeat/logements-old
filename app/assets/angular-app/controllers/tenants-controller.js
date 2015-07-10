@@ -67,9 +67,9 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$routeParams', '$l
     this.create = function () {
       var newTenant = new Tenants(that.tenant);
 
-      newTenant.$save(function (response) {
-        that.items.push(that.tenant);
-        that.showTenant(that.tenant);
+      newTenant.$save(function (data, headers) {
+        that.items.push(data);
+        that.showTenant(data);
       }, function (response) {
         console.log(response.data.errors);
       });

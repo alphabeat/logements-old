@@ -68,9 +68,8 @@ app.controller('BuildingsIndexController', ['$routeParams', 'Data', 'Buildings',
 			var newBuilding = new Buildings(that.building);
 
 			newBuilding.$save(function (data, headers) {
-				console.log(JSON.stringify(data));
-       			that.items.push(that.building);
-       			that.showBuilding(that.building);
+       			that.items.push(data);
+       			that.showBuilding(data);
 			}, function (response) {
 				console.log(response.data.errors);
 			});

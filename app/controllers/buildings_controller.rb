@@ -30,7 +30,7 @@ class BuildingsController < ApplicationController
 
 	def create 
 		@building = Building.create building_params
-		render nothing: true
+    render json: @building
 	end
 
 	def update
