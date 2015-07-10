@@ -7,38 +7,74 @@
 		<i class="fa fa-pencil"></i>
 	</button>
 </h3>
-
-<div class="col-sm-3 col-md-3 text-middle">
-	<strong>Appartement</strong><br />
-	<strong>Date de naissance</strong><br />
-	<strong>Téléphone</strong><br />
-	<strong>Téléphone des parents</strong><br />
-	<strong>Email</strong><br />
-	<strong>Date d'entrée</strong><br />
-	<strong>Date de sortie</strong><br />
-	<strong>Allocations (CAF)</strong><br />
-	<strong>Loyer</strong><br />
-	<strong>Internet</strong><br />
-	<strong>Solde (à payer)</strong><br />
-</div>
-<div class="col-sm-6 col-md-6">
-	<span ng-controller="AppartmentsIndexController as appartments">
-		<span ng-repeat="appart in appartments.items | filter:{ id: tenants.tenant.appartment_id }:true">
-			<span ng-controller="BuildingsIndexController as buildings">
-				<span ng-repeat="building in buildings.items | filter:{ id: appart.building_id }:true">
-					{{building.name}} - N°{{appart.number}}
+	
+<div ng-hide="isToDoVisible">
+	<div class="row">
+		<div class="col-sm-3 col-md-3 text-middle">
+			<strong>Appartement</strong><br />
+			<strong>Date de naissance</strong><br />
+			<strong>Téléphone</strong><br />
+			<strong>Téléphone des parents</strong><br />
+			<strong>Email</strong><br />
+			<strong>Date d'entrée</strong><br />
+			<strong>Date de sortie</strong><br />
+			<strong>Allocations (CAF)</strong><br />
+			<strong>Loyer</strong><br />
+			<strong>Internet</strong><br />
+			<strong>Solde (à payer)</strong><br />
+		</div>
+		<div class="col-sm-6 col-md-6">
+			<span ng-controller="AppartmentsIndexController as appartments">
+				<span ng-repeat="appart in appartments.items | filter:{ id: tenants.tenant.appartment_id }:true">
+					<span ng-controller="BuildingsIndexController as buildings">
+						<span ng-repeat="building in buildings.items | filter:{ id: appart.building_id }:true">
+							{{building.name}} - N°{{appart.number}}
+						</span>
+					</span>
 				</span>
-			</span>
-		</span>
-	</span><br />
-	{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
-	0{{tenants.tenant.phone}} <br />
-	0{{tenants.tenant.parentsphone}} <br />
-	<a href="mailto:{{tenants.tenant.email}}">{{tenants.tenant.email}}</a> <br />
-	{{tenants.tenant.startdate | date:'d/M/y'}} <br />
-	{{tenants.tenant.enddate | date:'d/M/y'}} <br />
-	{{tenants.tenant.cafamount}} € <br />
-	{{tenants.tenant.rent}} € <br />
-	{{ (tenants.tenant.internet) ? "Oui" : "Non" }} <br />
-	{{tenants.tenant.solde}} € <br />
+			</span><br />
+			{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
+			0{{tenants.tenant.phone}} <br />
+			0{{tenants.tenant.parentsphone}} <br />
+			<a href="mailto:{{tenants.tenant.email}}">{{tenants.tenant.email}}</a> <br />
+			{{tenants.tenant.startdate | date:'d/M/y'}} <br />
+			{{tenants.tenant.enddate | date:'d/M/y'}} <br />
+			{{tenants.tenant.cafamount}} € <br />
+			{{tenants.tenant.rent}} € <br />
+			{{ (tenants.tenant.internet) ? "Oui" : "Non" }} <br />
+			{{tenants.tenant.solde}} € <br />
+		</div>
+	</div>
+
+	<div class="text-center">
+		<div class="box-tenant"
+			ng-click="tenants.sendEmail('', 
+									tenants.topicCAF(tenants.tenant), 
+									tenants.bodyCAF(tenants.tenant))">
+			<i class="fa fa-envelope-o fa-5x"></i><br /><br />
+			CAF
+		</div>
+		<div class="box-tenant" ng-click="isToDoVisible = true">
+			<i class="fa fa-check fa-5x"></i><br /><br />
+			TO-DO
+		</div>
+		<div class="box-tenant" 
+			ng-click="tenants.sendEmail(tenants.tenant.email, 
+									'[Rappel] Loyer ce mois-ci', 
+									tenants.remindRent(tenants.tenant.firstname))">
+			<i class="fa fa-bell-o fa-5x"></i><br /><br />
+			RAPPEL
+		</div>
+	</div>
+</div>
+
+<div ng-show="isToDoVisible">
+	<h3>Liste des choses à faire</h3>
+	
+	<div class="text-center">
+		<button type="button" class="btn btn-warning btn-sm" ng-click="isToDoVisible = false">
+			<i class="fa fa-undo"></i>
+			Retour à la fiche du locataire
+		</button>
+	</div>
 </div>

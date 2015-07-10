@@ -73,5 +73,33 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       }, function (response) {
         console.log(response.data.errors);
       });
-    } 
+    }
+
+    this.topicCAF = function (tenant) {
+      return 'Informations concernant '+tenant.firstname+' '+tenant.lastname;
+    }
+
+    this.bodyCAF = function (tenant) {
+      var cafMsg = 'Bonjour, %0D%0A';
+      cafMsg += 'Voici les informations concernant '+tenant.firstname+' '+tenant.lastname+' : %0D%0A';
+
+      return cafMsg;
+    }
+
+    this.remindRent = function (firstname) {
+      var remindRentMsg = 'Bonjour '+firstname+', %0D%0A';
+      remindRentMsg += 'Je constate que vous n\'avez pas encore payé votre loyer ce mois-ci. %0D%0A';
+      remindRentMsg += 'Rappelez moi au 06 62 18 66 94 pour qu\'on puisse en discuter.%0D%0A';
+      remindRentMsg += '%0D%0AMerci d\'avance, %0D%0A';
+      
+      return remindRentMsg;
+    }
+    
+    this.sendEmail = function(email, subject, body) {
+      var link = "mailto:"+ email
+               + "?subject=" + escape(subject)
+               + "&body=" + body; 
+
+      window.location.href = link;
+    }
 }]);
