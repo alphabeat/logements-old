@@ -30,7 +30,7 @@ class AppartmentsController < ApplicationController
 
 	def create 
 		@appartment = Appartment.create appartment_params
-		render nothing: true
+    render json: @appartment
 	end
 
 	def update 

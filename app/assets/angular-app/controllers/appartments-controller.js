@@ -2,22 +2,29 @@
 
 var app = angular.module('app');
 
-app.controller('AppartmentsIndexController', ['$routeParams', 'Data', 'Appartments', '$location', '$window',
-	function ($routeParams, Data, Appartments, $location, $window) {
+app.controller('AppartmentsIndexController', ['$routeParams', 'Data', 'Appartments', '$location', '$window', '$filter',
+	function ($routeParams, Data, Appartments, $location, $window, $filter) {
 		var that = this;
 		this.items = Data.appartments;
 		this.appartment = {};
 		this.modif = {};
 
-		this.update = function(id) {
-			that.appartment = angular.copy(that.modif);
-			Appartments.update({id: id}, that.appartment, function () {
-				this.items = Appartments.query();
-			});
+		this.update = function(appartment) {
+			Appartments.update({id: id}, appartment);
 		}
+    
+    this.save = function (bid) {
+      if (that.appartment.id) {
+        that.update(that.appartment);
+      } else {
+        that.appartment.building_id = bid;
+        that.create();
+      }
+      that.reset();
+    }
 
 		this.reset = function () {
-			that.modif = angular.copy(that.appartment);
+			that.appartment = {};
 		}
 
 		this.destroy = function (id) {
@@ -25,18 +32,16 @@ app.controller('AppartmentsIndexController', ['$routeParams', 'Data', 'Appartmen
 
 			if (confirm) {
 				Appartments.remove({id: id}, function () {
-					that.items = Data.appartments = Appartments.query();
+					Data.appartments = that.items = $filter('filter')(that.items, {id: '!'+id});
 				});
 			}
 		}
 
-		this.create = function (bid) {
-			that.appartment.building_id = bid;
+		this.create = function () {
 			var newAppart = new Appartments(that.appartment);
 
-			newAppart.$save(function () {
-				that.appartment = {};
-				that.items = Data.appartments = Appartments.query();
+			newAppart.$save(function (data, headers) {
+				that.items.push(data);
 			}, function (response) {
 				console.log(response.data.errors);
 			});
