@@ -5,6 +5,7 @@ class CreateTenants < ActiveRecord::Migration
       t.string :lastname
       t.date :birthdate
       t.integer :phone
+      t.string :parentsadress
   	  t.integer :parentsphone
   	  t.string :email
       t.date :startdate
@@ -13,6 +14,7 @@ class CreateTenants < ActiveRecord::Migration
   	  t.integer :rent
       t.boolean :internet
   	  t.integer :solde
+      t.string :payment
       t.boolean :haspaid
 
       t.timestamps

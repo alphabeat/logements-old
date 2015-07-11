@@ -5,6 +5,9 @@
 	</div>
 	<div class="list-item" ng-repeat="tenant in filteredTenants = (tenants.items | filter:searchText | orderBy:'lastname')"
 		ng-click="tenants.showTenant(tenant)">
+		<span class="has_paid pull-right">
+			<i class="fa fa-circle" ng-class="{ 'active' : tenant.haspaid}"></i>
+		</span>
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
 		<h5 ng-controller="AppartmentsIndexController as appartments">
 			<span ng-repeat="appart in appartments.items | filter:{ id: tenant.appartment_id }:true">

@@ -75,13 +75,26 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       });
     }
 
+    this.hasPaid = function (bool) {
+      if (!bool) {
+        var confirm = $window.confirm("Êtes vous sûr de vouloir annuler le paiement ?");
+
+        if (!confirm)
+          return;
+      }
+      that.tenant.haspaid = bool;
+      that.update(that.tenant);
+    }
+
     this.topicCAF = function (tenant) {
       return 'Informations concernant '+tenant.firstname+' '+tenant.lastname;
     }
 
-    this.bodyCAF = function (tenant) {
+    this.bodyCAF = function (tenant, address) {
       var cafMsg = 'Bonjour, %0D%0A';
       cafMsg += 'Voici les informations concernant '+tenant.firstname+' '+tenant.lastname+' : %0D%0A';
+      cafMsg += 'Adresse : '+address.street_number+', '+address.street_type+' '+address.street_name+' - '; 
+      cafMsg += address.zipcode+' '+address.city+'%0D%0A';
 
       return cafMsg;
     }
@@ -89,7 +102,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.remindRent = function (firstname) {
       var remindRentMsg = 'Bonjour '+firstname+', %0D%0A';
       remindRentMsg += 'Je constate que vous n\'avez pas encore payé votre loyer ce mois-ci. %0D%0A';
-      remindRentMsg += 'Rappelez moi au 06 62 18 66 94 pour qu\'on puisse en discuter.%0D%0A';
+      remindRentMsg += 'Rappelez moi au 06 62 18 66 94 afin d\'en discuter.%0D%0A';
       remindRentMsg += '%0D%0AMerci d\'avance, %0D%0A';
       
       return remindRentMsg;

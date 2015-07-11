@@ -49,6 +49,7 @@ class TenantsController < ApplicationController
 			:lastname, 
 			:birthdate,
 			:phone,
+			:parentsadress,
 			:parentsphone,
 			:email,
 			:startdate,
@@ -57,6 +58,7 @@ class TenantsController < ApplicationController
 			:rent,
 			:internet,
 			:solde,
+			:payment,
       		:haspaid,
 			:appartment_id
 		])

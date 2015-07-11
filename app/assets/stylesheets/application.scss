@@ -160,7 +160,7 @@
   width: 150px;
   height: 150px;
   padding: 20px;
-  margin: 20px;
+  margin: 30px 10px 0 10px;
   text-align: center;
   cursor: pointer;
   background-color: rgba(217, 83, 79, 0.15);
@@ -169,4 +169,12 @@
 .box-tenant:hover {
   background-color: rgba(217, 83, 79, 0.30);
   box-shadow: 0 5px 11px 0 rgba(0,0,0,0.5);
+}
+
+.has_paid {
+  color: $brand-danger;
+}
+
+.has_paid .active {
+  color: $brand-success;
 }
