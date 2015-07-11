@@ -5,7 +5,7 @@ class CreateTenants < ActiveRecord::Migration
       t.string :lastname
       t.date :birthdate
       t.integer :phone
-      t.string :parentsadress
+      t.string :parentsaddress
   	  t.integer :parentsphone
   	  t.string :email
       t.date :startdate

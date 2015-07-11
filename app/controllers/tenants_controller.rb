@@ -49,7 +49,7 @@ class TenantsController < ApplicationController
 			:lastname, 
 			:birthdate,
 			:phone,
-			:parentsadress,
+			:parentsaddress,
 			:parentsphone,
 			:email,
 			:startdate,

@@ -5,6 +5,8 @@ var app = angular.module('app');
 app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter', function (Data, Tenants, $window, $filter) {
 		var that = this;
 		this.items = Data.tenants;
+    this.buildings = Data.buildings;
+    this.appartments = Data.appartments;
 		this.tenant = {};
 		this.modif = {};
 
@@ -93,8 +95,14 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.bodyCAF = function (tenant, address) {
       var cafMsg = 'Bonjour, %0D%0A';
       cafMsg += 'Voici les informations concernant '+tenant.firstname+' '+tenant.lastname+' : %0D%0A';
-      cafMsg += 'Adresse : '+address.street_number+', '+address.street_type+' '+address.street_name+' - '; 
+      cafMsg += '- Adresse : '+address.street_number+', '+address.street_type+' '+address.street_name+' - '; 
       cafMsg += address.zipcode+' '+address.city+'%0D%0A';
+      cafMsg += '- Entrée le : '+$filter('date')(tenant.startdate, 'dd/MM/yyyy')+'%0D%0A';
+      cafMsg += '- Sortie prévue le : '+$filter('date')(tenant.enddate, 'dd/MM/yyyy')+'%0D%0A';
+      cafMsg += '- Téléphone : 0'+tenant.phone+'%0D%0A';
+      cafMsg += '- Adresse des parents : '+tenant.parentsaddress+'%0D%0A';
+      cafMsg += '- Téléphone des parents : 0'+tenant.parentsphone+'%0D%0A';
+      cafMsg += '%0D%0A'+tenant.firstname + ((tenant.haspaid) ? ' est à jour de ses loyers.' : ' n\'a pas encore payé ce mois ci.');
 
       return cafMsg;
     }

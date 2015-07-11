@@ -32,8 +32,8 @@
 					<td>{{appart.number}}</td>
 					<td>{{appart.area}}</td>
 					<td>{{appart.rent}}</td>
-					<td ng-controller="TenantsIndexController as tenants">
-						<span ng-repeat="tenant in filteredTenants = (tenants.items | filter: { appartment_id: appart.id }:true)">
+					<td >
+						<span ng-repeat="tenant in filteredTenants = (buildings.tenants | filter:{appartment_id: appart.id}:true)">
 							{{tenant.firstname}} {{tenant.lastname}}
 							<span class="has_paid">
 								<i class="fa fa-circle" ng-class="{ 'active' : tenant.haspaid}"></i>

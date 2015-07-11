@@ -18,15 +18,10 @@ angular.module('app', ['ngRoute', 'ngResource'])
 	   				controllerAs: 'suppliers',
 	   				templateUrl: '<%= asset_path('templates/suppliers/index.html') %>'
 	   			})
+	   			.when('/documents', {
+	   				templateUrl: '<%= asset_path('templates/documents/index.html') %>'
+	   			})
 	   			.otherwise('/buildings');
 
 	   		$httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token').attr('content');
-/*	   		$httpProvider.interceptors.push(function ($q) {
-	   			return {
-	   				'response': function (response) {
-	   					console.log(response);
-	   					return response;
-	   				}
-	   			}
-	   		});*/
 	   }]);

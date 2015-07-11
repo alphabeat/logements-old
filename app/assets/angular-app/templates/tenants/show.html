@@ -27,23 +27,19 @@
 			<strong>Mois en cours</strong><br />
 		</div>
 		<div class="col-sm-6 col-md-6">
-			<span ng-controller="AppartmentsIndexController as appartments">
-				<span ng-repeat="appart in appartments.items | filter:{ id: tenants.tenant.appartment_id }:true">
-					<span ng-controller="BuildingsIndexController as buildings">
-						<span ng-repeat="building in buildings.items | filter:{ id: appart.building_id }:true">
-							<span ng-init="tenants.address = building"></span>
-							{{building.name}} - N°{{appart.number}}
-						</span>
-					</span>
+			<span ng-repeat="appart in tenants.appartments | filter:{id: tenants.tenant.appartment_id}:true">
+				<span ng-repeat="building in tenants.buildings | filter:{id: appart.building_id}:true">
+					<span ng-init="tenants.address = building"></span>
+					{{building.name}} - N°{{appart.number}}
 				</span>
 			</span><br />
-			{{tenants.tenant.birthdate | date:'d/M/y'}} <br />
+			{{tenants.tenant.birthdate | date:'dd/MM/y'}} <br />
 			0{{tenants.tenant.phone}} <br />
-			{{tenants.tenant.parentsadress}} <br />
+			{{tenants.tenant.parentsaddress}} <br />
 			0{{tenants.tenant.parentsphone}} <br />
 			<a href="mailto:{{tenants.tenant.email}}">{{tenants.tenant.email}}</a> <br />
-			{{tenants.tenant.startdate | date:'d/M/y'}} <br />
-			{{tenants.tenant.enddate | date:'d/M/y'}} <br />
+			{{tenants.tenant.startdate | date:'dd/MM/y'}} <br />
+			{{tenants.tenant.enddate | date:'dd/MM/y'}} <br />
 			{{tenants.tenant.cafamount}} € <br />
 			{{tenants.tenant.rent}} € <br />
 			{{ (tenants.tenant.internet) ? "Oui" : "Non" }} <br />
