@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709063702) do
+ActiveRecord::Schema.define(version: 20150712140349) do
 
   create_table "appartments", force: true do |t|
     t.integer  "building_id"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20150709063702) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "tasks", force: true do |t|
+    t.integer  "tenant_id"
+    t.string   "label"
+    t.date     "dueto"
+    t.boolean  "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["tenant_id"], name: "index_tasks_on_tenant_id"
 
   create_table "tenants", force: true do |t|
     t.string   "firstname"

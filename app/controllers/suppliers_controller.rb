@@ -15,7 +15,7 @@ class SuppliersController < ApplicationController
 
 	def create
 		@supplier = Supplier.create supplier_params
-    render json: @supplier
+   		render json: @supplier
 	end
 
 	def update

@@ -7,28 +7,27 @@ app.controller('AppartmentsIndexController', ['Data', 'Appartments', '$window', 
 		var that = this;
 		this.items = Data.appartments;
 		this.appartment = {};
-		this.modif = {};
 
 		this.update = function(appartment) {
-			Appartments.update({id: id}, appartment);
+			Appartments.update({id: appartment.id}, appartment);
 		}
     
-    this.save = function (bid) {
-      if (that.appartment.id) {
-        that.update(that.appartment);
-      } else {
-        that.appartment.building_id = bid;
-        that.create();
-      }
-      that.reset();
-    }
+	    this.save = function (bid) {
+	      if (that.appartment.id) {
+	        that.update(that.appartment);
+	      } else {
+	        that.appartment.building_id = bid;
+	        that.create();
+	      }
+	      that.reset();
+	    }
 
 		this.reset = function () {
 			that.appartment = {};
 		}
 
 		this.destroy = function (id) {
-			var confirm = $window.confirm('Voulez-vous vraiment supprimer cet appartement ?');
+			var confirm = $window.confirm('Voulez vous vraiment supprimer cet appartement ?');
 
 			if (confirm) {
 				Appartments.remove({id: id}, function () {

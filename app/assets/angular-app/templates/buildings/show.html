@@ -32,7 +32,7 @@
 					<td>{{appart.number}}</td>
 					<td>{{appart.area}}</td>
 					<td>{{appart.rent}}</td>
-					<td >
+					<td>
 						<span ng-repeat="tenant in filteredTenants = (buildings.tenants | filter:{appartment_id: appart.id}:true)">
 							{{tenant.firstname}} {{tenant.lastname}}
 							<span class="has_paid">

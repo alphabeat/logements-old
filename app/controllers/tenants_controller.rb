@@ -30,7 +30,7 @@ class TenantsController < ApplicationController
 
 	def create
 		@tenant = Tenant.create tenants_params
-    render json: @tenant
+    	render json: @tenant
 	end
 
 	def update

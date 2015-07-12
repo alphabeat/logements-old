@@ -7,8 +7,6 @@ app.controller('SuppliersIndexController', ['Data', 'Suppliers', '$window', '$fi
 	this.items = Data.suppliers;
 	this.supplier = {};
   
-  console.log(this.items);
-  
   this.showSupplier = function (supplier) {
     that.isShowVisible = true;
     that.supplier = supplier;

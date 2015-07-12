@@ -8,7 +8,7 @@
 	</button>
 </h3>
 	
-<div ng-hide="isToDoVisible">
+<div ng-hide="tenants.isToDoVisible">
 	<div class="row">
 		<div class="col-sm-3 col-sm-offset-3 col-md-3 text-middle">
 			<strong>Appartement</strong><br />
@@ -66,7 +66,7 @@
 			<i class="fa fa-envelope-o fa-4x"></i><br /><br />
 			CAF
 		</div>
-		<div class="box-tenant" ng-click="isToDoVisible = true">
+		<div class="box-tenant" ng-click="tenants.isToDoVisible = true">
 			<i class="fa fa-check fa-4x"></i><br /><br />
 			TO-DO
 		</div>
@@ -84,11 +84,65 @@
 	</div>
 </div>
 
-<div ng-show="isToDoVisible" class="text-center">
-	<h3>Liste des choses à faire</h3>
+<div ng-show="tenants.isToDoVisible" ng-controller="TasksIndexController as tasks">
+	<h3 class="text-center">Liste des choses à faire</h3>
 	
-	<button type="button" class="btn btn-warning btn-sm" ng-click="isToDoVisible = false">
-		<i class="fa fa-undo"></i>
-		Retour à la fiche du locataire
-	</button>
+	<form class="form-inline" ng-submit="tasks.save(tenants.tenant.id)">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Tâche</th>
+					<th>Pour le</th>
+					<th>Etat</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="task in filteredTasks = (tasks.items | orderBy:'-dueto' | filter:{tenant_id: tenants.tenant.id}:true)">
+				<tr class="todo_state" ng-class="{'done': task.state}">
+					<td>{{task.label}}</td>
+					<td>{{task.dueto | date:'dd/MM/y'}}</td>
+					<td>
+						<i class="fa fa-check" style="cursor: pointer;" ng-click="tasks.toggleState(task)"></i>
+					</td>
+					<td>
+						<button type="button" class="btn btn-warning btn-sm" ng-click="">
+							<i class="fa fa-pencil"></i>
+						</button>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="tasks.destroy(task.id)">
+							<i class="fa fa-trash-o"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr ng-hide="filteredTasks.length || tasks.task.label">
+					<td>
+						Aucune tâche trouvée.
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr ng-show="tasks.task.label" class="todo_state" ng-class="{'done': tasks.task.state}">
+					<td>{{tasks.task.label}}</td>
+					<td>{{tasks.task.dueto | date:'dd/MM/y'}}</td>
+					<td><i class="fa fa-check"></i></td>
+					<td></td>
+				</tr>
+				<tr>
+						<td><input type="text" class="form-control" ng-model="tasks.task.label" required /></td>
+						<td><input type="date" class="form-control" ng-model="tasks.task.dueto" /></td>
+						<td><input type="checkbox" ng-model="tasks.task.state" /></td>
+						<td><button type="submit" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button></td>
+				</tr>
+			</tfoot>
+		</table>
+	</form>
+
+	<div class="text-center">
+		<button type="button" class="btn btn-warning btn-sm" ng-click="tenants.isToDoVisible = false">
+			<i class="fa fa-undo"></i>
+			Retour à la fiche du locataire
+		</button>
+	</div>
 </div>

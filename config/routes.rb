@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :appartments, :defaults => {format: :json}
     resources :tenants, :defaults => {format: :json}
     resources :suppliers, :defaults => {format: :json}
+    resources :tasks, :defaults => {format: :json}
   end
   root to: 'home#index'
 end

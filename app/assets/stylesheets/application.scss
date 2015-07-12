@@ -178,3 +178,11 @@
 .has_paid .active {
   color: $brand-success;
 }
+
+.todo_state {
+  color: gray;
+}
+
+.done {
+  color: $brand-success;
+}
