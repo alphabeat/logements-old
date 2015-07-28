@@ -27,11 +27,11 @@
 					<th>Actions</th>
 				</tr>
 			</thead>
-			<tbody ng-repeat="appart in appartments.items | filter:{building_id: buildings.building.id}:true">
+			<tbody ng-repeat="appart in appartments.items | filter:{building_id: buildings.building.id}:true | orderBy:'number'">
 				<tr>
 					<td>{{appart.number}}</td>
-					<td>{{appart.area}}</td>
-					<td>{{appart.rent}}</td>
+					<td>{{appart.area}} m²</td>
+					<td>{{appart.rent}} €</td>
 					<td>
 						<span ng-repeat="tenant in filteredTenants = (buildings.tenants | filter:{appartment_id: appart.id}:true)">
 							{{tenant.firstname}} {{tenant.lastname}}

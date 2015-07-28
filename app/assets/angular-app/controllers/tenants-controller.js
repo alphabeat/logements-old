@@ -12,6 +12,8 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
 
     this.showTenant = function (tenant) {
       that.isShowVisible = true;
+      that.isEditVisible = false;
+      that.isNewVisible = false;
       that.tenant = tenant;
     }
     
@@ -37,7 +39,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
         that.isEditVisible = false;
         angular.extend(that.tenant, that.modif);
         that.showTenant(that.tenant);
-      } else {
+      } else if (that.tenant.id === undefined) {
         that.isNewVisible = false;
         that.tenant = {};
       }
