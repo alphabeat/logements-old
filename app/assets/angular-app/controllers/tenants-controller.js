@@ -2,7 +2,7 @@
 
 var app = angular.module('app');
 
-app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter', function (Data, Tenants, $window, $filter) {
+app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter', '$scope', function (Data, Tenants, $window, $filter, $scope) {
 		var that = this;
 		this.items = Data.tenants;
     this.buildings = Data.buildings;
@@ -89,6 +89,15 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       that.tenant.haspaid = bool;
       that.update(that.tenant);
     }
+
+/*    this.getAppt = function (apptID) {
+      that.appartments.forEach(function (appt, index, array) {
+        if (appt.id == apptID) {
+          console.log(appt.number);
+          return appt.number;
+        }
+      });
+    }*/
 
     this.topicCAF = function (tenant) {
       return 'Informations concernant '+tenant.firstname+' '+tenant.lastname;

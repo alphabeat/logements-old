@@ -9,12 +9,11 @@
 			<i class="fa fa-circle" ng-class="{ 'active' : tenant.haspaid}"></i>
 		</span>
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
-		<h5 ng-controller="AppartmentsIndexController as appartments">
-			<span ng-repeat="appart in appartments.items | filter:{ id: tenant.appartment_id }:true">
-				<span ng-controller="BuildingsIndexController as buildings">
-					<span ng-repeat="building in buildings.items | filter:{ id: appart.building_id }:true">
-						{{building.name}} - N°{{appart.number}}
-					</span>
+		<h5>
+			{{tenant.appartment_id}}<br />
+			<span ng-repeat="appart in tenants.appartments | filter:{ id: tenant.appartment_id}">
+				<span ng-repeat="building in tenants.buildings | filter:{ id: appart.building_id }:true">
+					{{building.name}} - N°{{appart.number}}
 				</span>
 			</span>
 		</h5>

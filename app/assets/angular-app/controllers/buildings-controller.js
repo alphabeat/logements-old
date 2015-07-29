@@ -11,6 +11,8 @@ app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$fi
 	
 	this.showBuilding = function (building) {
 		that.isShowVisible = true;
+		that.isEditVisible = false;
+		that.isNewVisible = false;
 		that.building = building;
 	}
 

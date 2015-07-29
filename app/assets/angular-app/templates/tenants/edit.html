@@ -9,15 +9,15 @@
 	</div>
 	<div class="form-group" ng-show="changeAppart">
 		<label class="col-sm-2 control-label">Immeuble</label>
-		<div class="col-sm-4" ng-controller="BuildingsIndexController as buildings">
+		<div class="col-sm-4">
 			<select class="form-control" ng-model="tenants.building" convert-to-number>
-				<option ng-repeat="building in buildings.items" value="{{building.id}}">{{building.name}}</option>
+				<option ng-repeat="building in tenants.buildings" value="{{building.id}}">{{building.name}}</option>
 			</select>
 		</div>
 		<label class="col-sm-2 control-label">Appartement</label>
-		<div ng-show="tenants.building" class="col-sm-4" ng-controller="AppartmentsIndexController as appartments">
+		<div ng-show="tenants.building" class="col-sm-4">
 			<select class="form-control" ng-model="tenants.tenant.appartment_id" convert-to-number>
-				<option ng-repeat="appart in appartments.items | filter: { building_id: tenants.building } | orderBy:'number'" value="{{appart.id}}">
+				<option ng-repeat="appart in tenants.appartments | filter: { building_id: tenants.building } | orderBy:'number'" value="{{appart.id}}">
 					{{appart.number}}
 				</option>
 			</select>
@@ -100,7 +100,7 @@
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-4">
 			<button type="submit" class="btn btn-success">Modifier</button>
-			<button type="button" class="btn btn-warning" ng-click="tenants.cancel()">Annuler</button>
+			<button type="button" class="btn btn-warning" ng-click="changeAppart=false; tenants.cancel()">Annuler</button>
 		</div>
 	</div>
 </form>
