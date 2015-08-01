@@ -85,7 +85,6 @@
   border-right: 1px solid $brand-danger;
   padding: 0;
   height: calc(100% - 100px);
-  width: 25%;
 }
 
 .list-item {
@@ -112,8 +111,6 @@
     display: block;
     overflow-x: hidden;
     overflow-y: auto;
-    margin-left: 42%;
-    width: 58%;
     height: calc(100% - 100px); 
   }
 
