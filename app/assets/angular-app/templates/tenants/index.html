@@ -10,7 +10,6 @@
 		</span>
 		<h4>{{tenant.firstname}} {{tenant.lastname}}</h4>
 		<h5>
-			{{tenant.appartment_id}}<br />
 			<span ng-repeat="appart in tenants.appartments | filter:{ id: tenant.appartment_id}">
 				<span ng-repeat="building in tenants.buildings | filter:{ id: appart.building_id }:true">
 					{{building.name}} - N°{{appart.number}}
@@ -24,15 +23,17 @@
 </div>
 
 <div class="col-sm-5 col-sm-offset-7 col-md-6 col-md-offset-6 details">
-	<div ng-hide="tenants.isShowVisible || tenants.isEditVisible || tenants.isNewVisible" class="text-center">
-		<h1>Sélectionnez un locataire</h1>
-	</div>
-
 	<show-tenant ng-show="tenants.isShowVisible"></show-tenant>
 
 	<edit-tenant ng-show="tenants.isEditVisible"></edit-tenant>
     
     <new-tenant ng-show="tenants.isNewVisible"></new-tenant>
+
+	<div ng-hide="tenants.isShowVisible || tenants.isEditVisible || tenants.isNewVisible" class="text-center">
+		<h1>Sélectionnez un locataire</h1>
+		<h2>ou</h2>
+		<h1><button type="button" class="btn btn-success btn-lg" ng-click="tenants.newTenant()">Ajoutez un locataire</div></h1>
+	</div>
 </div>
 
-<div class="add" ng-click="tenants.newTenant()"><i class="fa fa-plus"></i></div>
+<!-- <div class="add" ng-click="tenants.newTenant()"><i class="fa fa-plus"></i></div> -->

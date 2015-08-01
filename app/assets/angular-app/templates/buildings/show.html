@@ -15,7 +15,7 @@
 
 <div ng-controller="AppartmentsIndexController as appartments">
 	<h3>Liste des appartements de l'immeuble</h3>
-	<form class="form-inline" ng-submit="appartments.save(buildings.building.id)">
+	<form class="form-inline">
 		<div class="table-responsive">
 		<table class="table">
 			<thead>
@@ -28,7 +28,7 @@
 				</tr>
 			</thead>
 			<tbody ng-repeat="appart in appartments.items | filter:{building_id: buildings.building.id}:true | orderBy:'number'">
-				<tr>
+				<tr ng-hide="editAppart">
 					<td>{{appart.number}}</td>
 					<td>{{appart.area}} m²</td>
 					<td>{{appart.rent}} €</td>
@@ -44,7 +44,7 @@
 						</span>
 					</td>
 					<td>
-						<button type="button" class="btn btn-sm btn-warning" ng-click="">
+						<button type="button" class="btn btn-sm btn-warning" ng-click="editAppart=true;appartments.editAppartment(appart)">
 							<i class="fa fa-pencil fa-lg"></i>
 						</button>
 						<button type="button" class="btn btn-sm btn-danger" ng-click="appartments.destroy(appart.id)">
@@ -52,20 +52,41 @@
 						</button>
 					</td>
 				</tr>
+				<tr ng-show="editAppart">
+					<td><input name="number" type="text" class="form-control" ng-model="appartments.appartment.number" required /></td>
+					<td><input name="area" type="text" class="form-control" ng-model="appartments.appartment.area" required /></td>
+					<td><input name="rent" type="text" class="form-control" ng-model="appartments.appartment.rent" /></td>
+					<td></td>
+					<td>
+						<button type="button" class="btn btn-sm btn-success" ng-click="editAppart=false;appartments.save()">
+							<i class="fa fa-check fa-lg"></i>
+						</button>
+						<button type="button" class="btn btn-sm btn-warning" ng-click="editAppart=false;appartments.cancel()">
+							<i class="fa fa-undo fa-lg"></i>
+						</button>
+					</td>
+				</tr>
 			</tbody>
 			<tfoot>
-				<tr ng-show="appartments.appartment.number">
-					<td>{{appartments.appartment.number}}</td>
-					<td>{{appartments.appartment.area | number:2}} m²</td>
-					<td>{{appartments.appartment.rent | number:2}} €</td>
+				<tr ng-show="appartments.new_appartment.number">
+					<td>{{appartments.new_appartment.number}}</td>
+					<td>{{appartments.new_appartment.area | number:2}} m²</td>
+					<td>{{appartments.new_appartment.rent | number:2}} €</td>
 					<td>Aucun</td>
 				</tr>
 				<tr>
-					<td><input type="text" class="form-control" ng-model="appartments.appartment.number" required /></td>
-					<td><input type="text" class="form-control" ng-model="appartments.appartment.area" required/></td>
-					<td><input type="text" class="form-control" ng-model="appartments.appartment.rent"/></td>
+					<td><input name="number" type="text" class="form-control" ng-model="appartments.new_appartment.number" required /></td>
+					<td><input name="area" type="text" class="form-control" ng-model="appartments.new_appartment.area" required/></td>
+					<td><input name="rent" type="text" class="form-control" ng-model="appartments.new_appartment.rent"/></td>
 					<td></td>
-					<td><button type="submit" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button></td>
+					<td>
+						<button type="button" class="btn btn-sm btn-success" ng-click="appartments.save(buildings.building.id)">
+							<i class="fa fa-plus"></i>
+						</button>
+						<button type="button" class="btn btn-sm btn-warning" ng-click="appartments.cancel()">
+							<i class="fa fa-undo"></i>
+						</button>
+					</td>
 				</tr>
 			</tfoot>
 		</table>

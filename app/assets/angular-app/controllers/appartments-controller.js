@@ -7,23 +7,39 @@ app.controller('AppartmentsIndexController', ['Data', 'Appartments', '$window', 
 		var that = this;
 		this.items = Data.appartments;
 		this.appartment = {};
+		this.new_appartment = {};
+		this.modif = {};
+
+		this.editAppartment = function (appartment) {
+			that.appartment = appartment;
+			that.modif = angular.copy(that.appartment);
+		}
 
 		this.update = function(appartment) {
 			Appartments.update({id: appartment.id}, appartment);
+		}
+
+		this.cancel = function () {
+			if (that.appartment.id) {
+				angular.extend(that.appartment, that.modif);
+				that.appartment = {};
+			} else if (that.new_appartment) {
+				that.new_appartment = {};
+			}
 		}
     
 	    this.save = function (bid) {
 	      if (that.appartment.id) {
 	        that.update(that.appartment);
-	      } else {
-	        that.appartment.building_id = bid;
+	      } else if (that.new_appartment.number !== undefined) {
+	        that.new_appartment.building_id = bid;
 	        that.create();
 	      }
 	      that.reset();
 	    }
 
 		this.reset = function () {
-			that.appartment = {};
+			that.new_appartment = {};
 		}
 
 		this.destroy = function (id) {
@@ -37,7 +53,7 @@ app.controller('AppartmentsIndexController', ['Data', 'Appartments', '$window', 
 		}
 
 		this.create = function () {
-			var newAppart = new Appartments(that.appartment);
+			var newAppart = new Appartments(that.new_appartment);
 
 			newAppart.$save(function (data, headers) {
 				that.items.push(data);
