@@ -9,7 +9,7 @@
 </h3>
 
 <h4>
-	{{buildings.building.street_number}}, {{buildings.building.street_type}} {{buildings.building.street_name}} 
+	{{buildings.building.street_number}}, {{buildings.building.street_type}} {{buildings.building.street_name}}
 	{{buildings.building.zipcode}} - {{buildings.building.city}}
 </h4>
 
@@ -44,11 +44,11 @@
 						</span>
 					</td>
 					<td>
-						<button type="button" class="btn btn-sm btn-warning" ng-click="editAppart=true;appartments.editAppartment(appart)">
-							<i class="fa fa-pencil fa-lg"></i>
+						<button type="button" class="btn btn-xs btn-warning" ng-click="editAppart=true;appartments.editAppartment(appart)">
+							<i class="fa fa-pencil"></i>
 						</button>
-						<button type="button" class="btn btn-sm btn-danger" ng-click="appartments.destroy(appart.id)">
-							<i class="fa fa-trash-o fa-lg"></i>
+						<button type="button" class="btn btn-xs btn-danger" ng-click="appartments.destroy(appart.id)">
+							<i class="fa fa-trash-o"></i>
 						</button>
 					</td>
 				</tr>
@@ -58,10 +58,10 @@
 					<td><input name="rent" type="text" class="form-control" ng-model="appartments.appartment.rent" /></td>
 					<td></td>
 					<td>
-						<button type="button" class="btn btn-sm btn-success" ng-click="editAppart=false;appartments.save()">
+						<button type="button" class="btn btn-xs btn-success" ng-click="editAppart=false;appartments.save()">
 							<i class="fa fa-check fa-lg"></i>
 						</button>
-						<button type="button" class="btn btn-sm btn-warning" ng-click="editAppart=false;appartments.cancel()">
+						<button type="button" class="btn btn-xs btn-warning" ng-click="editAppart=false;appartments.cancel()">
 							<i class="fa fa-undo fa-lg"></i>
 						</button>
 					</td>
@@ -80,10 +80,10 @@
 					<td><input name="rent" type="text" class="form-control" ng-model="appartments.new_appartment.rent"/></td>
 					<td></td>
 					<td>
-						<button type="button" class="btn btn-sm btn-success" ng-click="appartments.save(buildings.building.id)">
+						<button type="button" class="btn btn-xs btn-success" ng-click="appartments.save(buildings.building.id)">
 							<i class="fa fa-plus"></i>
 						</button>
-						<button type="button" class="btn btn-sm btn-warning" ng-click="appartments.cancel()">
+						<button type="button" class="btn btn-xs btn-warning" ng-click="appartments.cancel()">
 							<i class="fa fa-undo"></i>
 						</button>
 					</td>
