@@ -8,7 +8,7 @@
 
 Building.create({
   street_number: 15,
-  street_type: "Allée",
+  street_type: "Allee",
   street_name: "Boissy d'Anglas",
   zipcode: 91000,
   city: "Evry",
@@ -57,11 +57,11 @@ Appartment.create({
   rent: 1400
 })
 
-Tenant.create({lastname: 'Kilo', 
-  firstname: 'Julien', 
-  birthdate: '21-10-1992', 
-  phone:'659418459', 
-  parentsaddress: '189, rue G. Clémenceau - 42153 Riorges',
+Tenant.create({lastname: 'Kilo',
+  firstname: 'Julien',
+  birthdate: '21-10-1992',
+  phone:'659418459',
+  parentsaddress: '189, rue G. Clemenceau - 42153 Riorges',
   parentsphone:'477712069',
   email:'julienkilo@gmail.com',
   startdate:'01-04-2015',
@@ -70,17 +70,17 @@ Tenant.create({lastname: 'Kilo',
 	rent:'599',
   internet: false,
 	solde:'400',
-  payment: 'Chèque',
+  payment: 'Cheque',
   haspaid: false,
 	appartment_id:'2'
 })
 
-Tenant.create({lastname: 'Kilo', 
-  firstname: 'Olivier', 
-  birthdate: '21-12-1990', 
+Tenant.create({lastname: 'Kilo',
+  firstname: 'Olivier',
+  birthdate: '21-12-1990',
   phone:'632045893',
-  parentsaddress: '189, rue G. Clémenceau - 42153 Riorges', 
-  parentsphone:'477712069', 
+  parentsaddress: '189, rue G. Clemenceau - 42153 Riorges',
+  parentsphone:'477712069',
   email:'olivier.kilo@centrale-marseille.fr',
   startdate:'01-09-2014',
 	enddate:'31-12-2015',
@@ -93,12 +93,12 @@ Tenant.create({lastname: 'Kilo',
 	appartment_id:'3'
 })
 
-Tenant.create({lastname: 'Fayad', 
-  firstname: 'Sarah', 
-  birthdate: '18-11-1993', 
-  phone:'617679301', 
+Tenant.create({lastname: 'Fayad',
+  firstname: 'Sarah',
+  birthdate: '18-11-1993',
+  phone:'617679301',
   parentsaddress: '12, rue du Moulin - 13000 Marseille',
-  parentsphone:'477712069', 
+  parentsphone:'477712069',
   email:'fayad_sarah@yahoo.fr',
   startdate:'01-09-2014',
 	enddate:'31-12-2015',
