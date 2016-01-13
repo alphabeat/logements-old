@@ -10,12 +10,12 @@
 		</span>
 		<h4>{{building.name}}</h4>
 		<h5>
-			{{building.street_number}}, {{building.street_type}} {{building.street_name}} 
+			{{building.street_number}}, {{building.street_type}} {{building.street_name}}
 			{{building.zipcode}} - {{building.city}}
 		</h5>
 	</div>
   <div class="text-center" ng-hide="filteredBuildings.length">
-    <h3>Aucun immeuble trouvé</h3>
+    <h3>Aucun logement trouvé</h3>
   </div>
 </div>
 
@@ -27,11 +27,11 @@
 	<new-building ng-show="buildings.isNewVisible"></new-building>
 
 	<div ng-hide="buildings.isShowVisible || buildings.isEditVisible || buildings.isNewVisible" class="text-center">
-		<h1>Sélectionnez un immeuble ou une maison</h1>
+		<h1>Sélectionner un logement</h1>
 		<h2>ou</h2>
 		<h1>
 			<button type="button" class="btn btn-success btn-lg" ng-click="buildings.newBuilding()">
-				Ajoutez un immeuble ou une maison
+				Ajouter un logement
 			</button>
 		</h1>
 	</div>

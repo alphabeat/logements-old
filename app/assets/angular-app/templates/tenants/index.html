@@ -26,13 +26,13 @@
 	<show-tenant ng-show="tenants.isShowVisible"></show-tenant>
 
 	<edit-tenant ng-show="tenants.isEditVisible"></edit-tenant>
-    
+
     <new-tenant ng-show="tenants.isNewVisible"></new-tenant>
 
 	<div ng-hide="tenants.isShowVisible || tenants.isEditVisible || tenants.isNewVisible" class="text-center">
-		<h1>Sélectionnez un locataire</h1>
+		<h1>Sélectionner un locataire</h1>
 		<h2>ou</h2>
-		<h1><button type="button" class="btn btn-success btn-lg" ng-click="tenants.newTenant()">Ajoutez un locataire</div></h1>
+		<h1><button type="button" class="btn btn-success btn-lg" ng-click="tenants.newTenant()">Ajouter un locataire</div></h1>
 	</div>
 </div>
 
