@@ -9,6 +9,11 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.appartments = Data.appartments;
 		this.tenant = {};
 		this.modif = {};
+		this.showModal = false;
+
+		this.toggleModal = function () {
+			that.showModal = !that.showModal;
+		}
 
     this.showTenant = function (tenant) {
       that.isShowVisible = true;
@@ -16,7 +21,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       that.isNewVisible = false;
       that.tenant = tenant;
     }
-    
+
     this.editTenant = function () {
       that.isShowVisible = false;
       that.isEditVisible = true;
@@ -44,7 +49,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
         that.tenant = {};
       }
     }
-    
+
     this.save = function () {
       if (that.tenant.id) {
         that.isEditVisible = false;
@@ -67,7 +72,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
         });
 			}
 		}
-	                                           
+
     this.create = function () {
       var newTenant = new Tenants(that.tenant);
 
@@ -106,7 +111,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.bodyCAF = function (tenant, address) {
       var cafMsg = 'Bonjour, %0D%0A';
       cafMsg += 'Voici les informations concernant '+tenant.firstname+' '+tenant.lastname+' : %0D%0A';
-      cafMsg += '- Adresse : '+address.street_number+', '+address.street_type+' '+address.street_name+' - '; 
+      cafMsg += '- Adresse : '+address.street_number+', '+address.street_type+' '+address.street_name+' - ';
       cafMsg += address.zipcode+' '+address.city+'%0D%0A';
       cafMsg += '- Entrée le : '+$filter('date')(tenant.startdate, 'dd/MM/yyyy')+'%0D%0A';
       cafMsg += '- Sortie prévue le : '+$filter('date')(tenant.enddate, 'dd/MM/yyyy')+'%0D%0A';
@@ -123,14 +128,14 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       remindRentMsg += 'Je constate que vous n\'avez pas encore payé votre loyer ce mois-ci. %0D%0A';
       remindRentMsg += 'Rappelez moi au 06 62 18 66 94 afin d\'en discuter.%0D%0A';
       remindRentMsg += '%0D%0AMerci d\'avance, %0D%0A';
-      
+
       return remindRentMsg;
     }
-    
+
     this.sendEmail = function(email, subject, body) {
       var link = "mailto:"+ email
                + "?subject=" + escape(subject)
-               + "&body=" + body; 
+               + "&body=" + body;
 
       window.location.href = link;
     }

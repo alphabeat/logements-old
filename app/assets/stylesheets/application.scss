@@ -17,7 +17,7 @@
 
 .navbar {
 	min-height: 100px;
-  z-index: 2000;
+  z-index: 100;
   border-radius: 0;
 }
 
@@ -36,6 +36,22 @@
 
 .sidebar {
   display: none;
+}
+
+.modal {
+  display: block;
+}
+
+.modal-body:before,
+  .modal-body:after {
+    display: table;
+    content: " ";
+}
+
+.modal-header:before,
+.modal-header:after {
+  display: table;
+  content: " ";
 }
 
 @media (min-width: 768px) {
@@ -111,7 +127,7 @@
     display: block;
     overflow-x: hidden;
     overflow-y: auto;
-    height: calc(100% - 100px); 
+    height: calc(100% - 100px);
   }
 
   .details > h1 {

@@ -22,6 +22,12 @@
 					<strong>
 						{{tenants.tenant.firstname}} {{tenants.tenant.lastname}}
 					</strong>
+					<div ng-show="tenants.tenant.haspaid" class="text-success">
+						<i class="fa fa-check"></i> &nbsp; A payé le mois en cours
+					</div>
+					<div ng-hide="tenants.tenant.haspaid" class="text-danger">
+						<i class="fa fa-ban"></i> &nbsp; N'a pas payé le mois en cours
+					</div>
 				</address>
 				<div class="col-sm-4">
 					Né(e) le {{tenants.tenant.birthdate | date:'dd/MM/y'}} <br />
@@ -53,16 +59,12 @@
 				</div>
 			</div>
 			<div class="panel-footer">
-				<div ng-show="tenants.tenant.haspaid" class="text-success">
-					<i class="fa fa-check"></i> &nbsp; A payé le mois en cours
-
+				<div ng-show="tenants.tenant.haspaid">
 					<a href ng-click="tenants.hasPaid(false)" class="btn btn-danger btn-xs">
 						<i class="fa fa-undo"></i> &nbsp; Annuler le paiement
 					</a>
 				</div>
-				<div ng-hide="tenants.tenant.haspaid" class="text-danger">
-					<i class="fa fa-ban"></i> &nbsp; N'a pas payé le mois en cours
-
+				<div ng-hide="tenants.tenant.haspaid">
 					<a href ng-click="tenants.hasPaid(true)" class="btn btn-success btn-xs">
 						<i class="fa fa-save"></i> &nbsp; Enregistrer le paiement
 					</a>
@@ -72,11 +74,9 @@
 	</div>
 
 	<div class="text-center">
-		<div class="box-tenant"
-			ng-click="tenants.sendEmail('',
-									tenants.topicCAF(tenants.tenant),
-									tenants.bodyCAF(tenants.tenant, tenants.address))">
+		<div class="box-tenant" ng-click="tenants.toggleModal()">
 			<i class="fa fa-envelope-o fa-4x"></i><br /><br />
+			{{tenants.showModal}}
 			CAF
 		</div>
 		<div class="box-tenant" ng-click="tenants.isToDoVisible = true">
@@ -151,6 +151,11 @@
 			</tfoot>
 		</table>
 	</form>
+
+	<!-- Modal -->
+	<modal title="Mail à la CAF" visible="tenants.showModal">
+		Objet : <input type="text" />
+	</modal>
 
 	<div class="text-center">
 		<button type="button" class="btn btn-warning btn-sm" ng-click="tenants.isToDoVisible = false">
