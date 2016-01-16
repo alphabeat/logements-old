@@ -9,12 +9,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.appartments = Data.appartments;
 		this.tenant = {};
 		this.modif = {};
-		this.showModal = false;
-
-		this.toggleModal = function () {
-			that.showModal = !that.showModal;
-		}
-
+		
     this.showTenant = function (tenant) {
       that.isShowVisible = true;
       that.isEditVisible = false;

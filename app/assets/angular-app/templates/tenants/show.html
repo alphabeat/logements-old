@@ -74,9 +74,11 @@
 	</div>
 
 	<div class="text-center">
-		<div class="box-tenant" ng-click="tenants.toggleModal()">
+		<div class="box-tenant"
+			ng-click="tenants.sendEmail(tenants.tenant.email,
+									tenants.topicCAF,
+									tenants.bodyCAF)">
 			<i class="fa fa-envelope-o fa-4x"></i><br /><br />
-			{{tenants.showModal}}
 			CAF
 		</div>
 		<div class="box-tenant" ng-click="tenants.isToDoVisible = true">
@@ -151,11 +153,6 @@
 			</tfoot>
 		</table>
 	</form>
-
-	<!-- Modal -->
-	<modal title="Mail à la CAF" visible="tenants.showModal">
-		Objet : <input type="text" />
-	</modal>
 
 	<div class="text-center">
 		<button type="button" class="btn btn-warning btn-sm" ng-click="tenants.isToDoVisible = false">
