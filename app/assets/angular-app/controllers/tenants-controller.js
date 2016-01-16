@@ -9,12 +9,14 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
     this.appartments = Data.appartments;
 		this.tenant = {};
 		this.modif = {};
-		
-    this.showTenant = function (tenant) {
+		that.selected = -1;
+
+    this.showTenant = function (index, tenant) {
       that.isShowVisible = true;
       that.isEditVisible = false;
       that.isNewVisible = false;
       that.tenant = tenant;
+			that.selected = index;
     }
 
     this.editTenant = function () {
@@ -38,7 +40,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       if (that.tenant.id) {
         that.isEditVisible = false;
         angular.extend(that.tenant, that.modif);
-        that.showTenant(that.tenant);
+        that.showTenant(that.selected, that.tenant);
       } else if (that.tenant.id === undefined) {
         that.isNewVisible = false;
         that.tenant = {};
@@ -49,7 +51,7 @@ app.controller('TenantsIndexController', ['Data', 'Tenants', '$window', '$filter
       if (that.tenant.id) {
         that.isEditVisible = false;
         that.update(that.tenant);
-        that.showTenant(that.tenant);
+        that.showTenant(that.selected, that.tenant);
       } else {
         that.isNewVisible = false;
         that.create();

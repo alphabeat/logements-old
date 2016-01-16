@@ -4,7 +4,7 @@
 		<div class="input-group-addon"><i class="fa fa-search"></i></div>
 	</div>
 	<div class="list-item" ng-repeat="building in filteredBuildings = (buildings.items | filter:searchText | orderBy:'name')"
-		ng-click="buildings.showBuilding(building)">
+		ng-class="{active: $index == buildings.selected}" ng-click="buildings.showBuilding($index, building)">
 		<span class="badge pull-right">
 			{{building.number_of_appartments}}
 		</span>

@@ -8,12 +8,14 @@ app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$fi
 	this.tenants = Data.tenants;
 	this.building = {};
 	this.modif = {};
-	
-	this.showBuilding = function (building) {
+	this.selected = -1;
+
+	this.showBuilding = function (index, building) {
 		that.isShowVisible = true;
 		that.isEditVisible = false;
 		that.isNewVisible = false;
 		that.building = building;
+		that.selected = index;
 	}
 
 	this.editBuilding = function () {
@@ -37,7 +39,7 @@ app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$fi
 		if (that.building.id) {
 			that.isEditVisible = false;
 			angular.extend(that.building, that.modif);
-			that.showBuilding(that.building);
+			that.showBuilding(that.selected, that.building);
 		} else {
 			that.isNewVisible = false;
 			that.building = {};
@@ -48,7 +50,7 @@ app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$fi
 		if (that.building.id) {
 			that.isEditVisible = false;
 			that.update(that.building);
-			that.showBuilding(that.building);
+			that.showBuilding(that.selected, that.building);
 		} else {
 			that.isNewVisible = false;
 			that.create();
@@ -72,7 +74,7 @@ app.controller('BuildingsIndexController', ['Data', 'Buildings', '$window', '$fi
 
 		newBuilding.$save(function (data, headers) {
    			that.items.push(data);
-   			that.showBuilding(data);
+   			that.showBuilding(that.selected, data);
 		}, function (response) {
 			console.log(response.data.errors);
 		});

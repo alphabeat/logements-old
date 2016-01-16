@@ -4,7 +4,7 @@
 		<div class="input-group-addon"><i class="fa fa-search"></i></div>
 	</div>
 	<div class="list-item" ng-repeat="tenant in filteredTenants = (tenants.items | filter:searchText | orderBy:'lastname')"
-		ng-click="tenants.showTenant(tenant)">
+		ng-class="{active: $index == tenants.selected}" ng-click="tenants.showTenant($index, tenant)">
 		<span class="has_paid pull-right">
 			<i class="fa fa-circle" ng-class="{ 'active' : tenant.haspaid}"></i>
 		</span>
